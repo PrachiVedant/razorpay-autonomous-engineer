@@ -8,12 +8,15 @@ from github.pull_requests import (
 from agents.repository import (
     get_repo_structure,
     read_file,
+    write_file,
+    run_command,
 )
-from agents.repository import write_file
-from agents.repository import run_command
 
 from agents.planner import plan_issue
 from agents.code_generator import generate_fix
+
+from razorpay.policy import validate_payment_plan
+from razorpay.validator import validate_changes
 
 
 def solve_issue(repo, issue_number):
@@ -31,7 +34,11 @@ def solve_issue(repo, issue_number):
             ↓
         Generate Fix
             ↓
-        Validate Changes
+        Razorpay Policy Check
+            ↓
+        Security Validation
+            ↓
+        Human Approval (if required)
             ↓
         Apply Changes
             ↓
@@ -54,7 +61,7 @@ def solve_issue(repo, issue_number):
     )
 
     print(
-        f"\n1. Fetching issue #{issue_number}..."
+        f"\n1. Fetching GitHub issue #{issue_number}..."
     )
 
     issue = get_issue(
@@ -75,7 +82,7 @@ def solve_issue(repo, issue_number):
     # --------------------------------------------------
 
     print(
-        "\n2. Reading repo structure..."
+        "\n2. Reading repository structure..."
     )
 
     structure = get_repo_structure()
@@ -85,8 +92,7 @@ def solve_issue(repo, issue_number):
     # --------------------------------------------------
 
     print(
-        "\n3. Analyzing the issue and "
-        "planning the fix..."
+        "\n3. Analyzing issue and planning fix..."
     )
 
     plan = plan_issue(
@@ -104,7 +110,36 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 4. Read relevant files
+    # 4. Display Razorpay risk classification
+    # --------------------------------------------------
+
+    payment_policy = validate_payment_plan(
+        plan
+    )
+
+    if plan.get("requires_razorpay", False):
+
+        print(
+            "\n   Razorpay payment operation detected."
+        )
+
+        print(
+            f"   Operation: "
+            f"{plan.get('payment_operation')}"
+        )
+
+        print(
+            f"   Risk level: "
+            f"{plan.get('risk_level')}"
+        )
+
+        print(
+            f"   Human approval required: "
+            f"{payment_policy['requires_approval']}"
+        )
+
+    # --------------------------------------------------
+    # 5. Read relevant files
     # --------------------------------------------------
 
     print(
@@ -126,7 +161,7 @@ def solve_issue(repo, issue_number):
         )
 
     # --------------------------------------------------
-    # 5. Generate code changes
+    # 6. Generate code changes
     # --------------------------------------------------
 
     print(
@@ -140,9 +175,14 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 6. Validate generated changes
+    # 7. Validate generated changes
     # --------------------------------------------------
 
+    print(
+        "\n6. Validating generated changes..."
+    )
+
+    # Existing GitHub/security validation
     try:
 
         validate_proposed_changes(
@@ -157,12 +197,113 @@ def solve_issue(repo, issue_number):
 
         return
 
+    # Razorpay-specific security validation
+    razorpay_validation = validate_changes(
+        fix["changes"]
+    )
+
+    if not razorpay_validation["valid"]:
+
+        print(
+            "\nRazorpay security validation failed."
+        )
+
+        for error in razorpay_validation["errors"]:
+
+            print(
+                f"   - {error}"
+            )
+
+        print(
+            "\nAborting before applying changes."
+        )
+
+        return
+
+    print(
+        "   Validation passed."
+    )
+
     # --------------------------------------------------
-    # 7. Apply changes
+    # 8. Human approval for risky payment changes
+    # --------------------------------------------------
+
+    if payment_policy["requires_approval"]:
+
+        print(
+            "\n"
+            + "=" * 60
+        )
+
+        print(
+            "HUMAN APPROVAL REQUIRED"
+        )
+
+        print(
+            "=" * 60
+        )
+
+        print(
+            f"Payment operation: "
+            f"{plan.get('payment_operation')}"
+        )
+
+        print(
+            f"Risk level: "
+            f"{plan.get('risk_level')}"
+        )
+
+        print(
+            "\nThe autonomous agent generated "
+            f"{len(fix['changes'])} file change(s)."
+        )
+
+        print(
+            "\nFiles that will be modified:"
+        )
+
+        for change in fix["changes"]:
+
+            print(
+                f"   - {change['path']}"
+            )
+
+        print(
+            "\nThe changes will NOT be applied "
+            "without approval."
+        )
+
+        approval = input(
+            "\nApprove these payment changes? "
+            "[y/N]: "
+        ).strip().lower()
+
+        if approval not in {
+            "y",
+            "yes",
+        }:
+
+            print(
+                "\nApproval denied."
+            )
+
+            print(
+                "Aborting before modifying "
+                "the repository."
+            )
+
+            return
+
+        print(
+            "\nHuman approval granted."
+        )
+
+    # --------------------------------------------------
+    # 9. Apply changes
     # --------------------------------------------------
 
     print(
-        "\n6. Applying changes..."
+        "\n7. Applying changes..."
     )
 
     for change in fix["changes"]:
@@ -178,13 +319,13 @@ def solve_issue(repo, issue_number):
         )
 
     # --------------------------------------------------
-    # 8. Create Git branch
+    # 10. Create Git branch
     # --------------------------------------------------
 
     branch_name = thread_id
 
     print(
-        f"\n7. Creating branch "
+        f"\n8. Creating branch "
         f"'{branch_name}'..."
     )
 
@@ -199,7 +340,7 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 9. Check sensitive files
+    # 11. Check sensitive files
     # --------------------------------------------------
 
     sensitive_files = [
@@ -211,7 +352,7 @@ def solve_issue(repo, issue_number):
     ]
 
     # --------------------------------------------------
-    # 10. Commit changes
+    # 12. Commit changes
     # --------------------------------------------------
 
     commit_result = git_operations.invoke(
@@ -234,7 +375,7 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 11. Push branch
+    # 13. Push branch
     # --------------------------------------------------
 
     push_result = git_operations.invoke(
@@ -249,7 +390,7 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 12. Create Pull Request
+    # 14. Create Pull Request
     # --------------------------------------------------
 
     pr_result = git_operations.invoke(
@@ -268,4 +409,6 @@ def solve_issue(repo, issue_number):
         f"   create_pr: {pr_result}"
     )
 
-    print("\nDone.")
+    print(
+        "\nDone."
+    )
