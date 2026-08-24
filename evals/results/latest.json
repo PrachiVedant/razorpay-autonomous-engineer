@@ -1,0 +1,38 @@
+[
+  {
+    "example_id": "issue_fix_001",
+    "latency_seconds": 17.311925411224365,
+    "correctness": {
+      "reasoning": "1) The GitHub issue requests fixing a typo in greet_user so it prints 'Hello' instead of 'Helo'. 2) The original file printed 'Helo'. 3) The expected change updates the print to 'Hello'. 4) The agent's modification changes the print statement to 'Hello' exactly as expected. 5) There are no additional or conflicting changes. Therefore, the generated changes satisfy the issue requirements and match the expected fix.",
+      "correctness": true
+    },
+    "relevance": {
+      "reasoning": "The issue requests fixing a typo in the greet_user function so it prints 'Hello' instead of 'Helo'. The original file utils/greeting.py contains the typo. The expected change is to modify this file to print 'Hello'. The agent modified exactly utils/greeting.py and updated the print statement to 'Hello'. No unrelated files were changed, and the modification directly addresses the issue without expanding scope.",
+      "relevance": true
+    }
+  },
+  {
+    "example_id": "issue_fix_002",
+    "latency_seconds": 4.915514230728149,
+    "correctness": {
+      "reasoning": "The issue states that the script uses datetime without importing it, and requests adding the missing import while keeping output formatting unchanged. The original file references datetime.date.today() without an import. The expected change adds 'import datetime' at the top of scripts/report.py and leaves the function body intact. The agent's change exactly adds 'import datetime' and preserves the rest of the code and the output formatting. This matches the expected content and resolves the error.",
+      "correctness": true
+    },
+    "relevance": {
+      "reasoning": "The issue requires adding a missing import for datetime in scripts/report.py to prevent a runtime error while keeping output formatting unchanged. The original file uses datetime.date.today() without import. The agent modified scripts/report.py by adding 'import datetime' at the top and left the rest of the function unchanged, matching the expected change. No unrelated files were altered and no unnecessary refactoring was introduced. The change directly addresses the issue and is appropriately scoped.",
+      "relevance": true
+    }
+  },
+  {
+    "example_id": "issue_fix_003",
+    "latency_seconds": 5.4319024085998535,
+    "correctness": {
+      "reasoning": "The issue requests documenting the NEW_API_KEY environment variable and adding a short usage example in the README's configuration section. The original README only stated to set variables without specifics. The expected change showed adding a simple bullet describing NEW_API_KEY. The agent's change adds a dedicated subsection for NEW_API_KEY with a clear explanation and a usage example (export NEW_API_KEY=\"your_api_key_here\"). This fulfills the core requirements: it documents the variable and provides a usage example. Although the format differs from the expected bullet point and includes more detail, it does not conflict with the intent and remains within acceptable differences per the criteria.",
+      "correctness": true
+    },
+    "relevance": {
+      "reasoning": "The issue requests documenting the NEW_API_KEY environment variable and adding a short usage example in the README's configuration section. The agent modified only README.md, which is the appropriate file. The changes add a dedicated subsection for NEW_API_KEY with an explanation and a bash export example, fulfilling the request for documentation and a usage example. Although the format differs from the expected bullet point, it remains within scope and directly addresses the issue without touching unrelated files.",
+      "relevance": true
+    }
+  }
+]
