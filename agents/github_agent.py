@@ -1,5 +1,8 @@
+from agents.repair_loop import repair_loop
 from github.issues import get_issue
+
 from github.git_operations import git_operations
+
 from github.pull_requests import (
     validate_proposed_changes,
     is_sensitive_file,
@@ -24,31 +27,41 @@ def solve_issue(repo, issue_number):
     Orchestrate the autonomous coding workflow.
 
     Flow:
+
         GitHub Issue
             ↓
-        Read Repository
+        Repository Analysis
             ↓
-        Plan
+        Planner
+            ↓
+        Razorpay Risk Classification
             ↓
         Read Relevant Files
             ↓
-        Generate Fix
-            ↓
-        Razorpay Policy Check
+        Code Generator
             ↓
         Security Validation
             ↓
-        Human Approval (if required)
+        Human Approval
             ↓
         Apply Changes
             ↓
-        Create Git Branch
+        Run Tests
             ↓
-        Commit
-            ↓
-        Push
-            ↓
-        Create Pull Request
+        ┌─────────────────┐
+        │                 │
+       PASS              FAIL
+        │                 │
+        ↓                 ↓
+       Git            Repair Agent
+                         ↓
+                     Run Tests
+                         ↓
+                       PASS
+                         ↓
+                        Git
+                         ↓
+                        PR
     """
 
     # --------------------------------------------------
@@ -88,7 +101,7 @@ def solve_issue(repo, issue_number):
     structure = get_repo_structure()
 
     # --------------------------------------------------
-    # 3. Plan the issue
+    # 3. Plan issue
     # --------------------------------------------------
 
     print(
@@ -110,14 +123,17 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 4. Display Razorpay risk classification
+    # 4. Razorpay risk classification
     # --------------------------------------------------
 
     payment_policy = validate_payment_plan(
         plan
     )
 
-    if plan.get("requires_razorpay", False):
+    if plan.get(
+        "requires_razorpay",
+        False,
+    ):
 
         print(
             "\n   Razorpay payment operation detected."
@@ -174,6 +190,11 @@ def solve_issue(repo, issue_number):
         file_content,
     )
 
+    print(
+        f"   Generated "
+        f"{len(fix['changes'])} file change(s)"
+    )
+
     # --------------------------------------------------
     # 7. Validate generated changes
     # --------------------------------------------------
@@ -182,7 +203,8 @@ def solve_issue(repo, issue_number):
         "\n6. Validating generated changes..."
     )
 
-    # Existing GitHub/security validation
+    # GitHub/security validation
+
     try:
 
         validate_proposed_changes(
@@ -197,7 +219,8 @@ def solve_issue(repo, issue_number):
 
         return
 
-    # Razorpay-specific security validation
+    # Razorpay security validation
+
     razorpay_validation = validate_changes(
         fix["changes"]
     )
@@ -225,7 +248,7 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 8. Human approval for risky payment changes
+    # 8. Human approval
     # --------------------------------------------------
 
     if payment_policy["requires_approval"]:
@@ -268,11 +291,6 @@ def solve_issue(repo, issue_number):
                 f"   - {change['path']}"
             )
 
-        print(
-            "\nThe changes will NOT be applied "
-            "without approval."
-        )
-
         approval = input(
             "\nApprove these payment changes? "
             "[y/N]: "
@@ -299,7 +317,7 @@ def solve_issue(repo, issue_number):
         )
 
     # --------------------------------------------------
-    # 9. Apply changes
+    # 9. Apply generated changes
     # --------------------------------------------------
 
     print(
@@ -319,13 +337,59 @@ def solve_issue(repo, issue_number):
         )
 
     # --------------------------------------------------
-    # 10. Create Git branch
+    # 10. Run tests + autonomous repair
+    # --------------------------------------------------
+
+    print(
+        "\n8. Running test suite..."
+    )
+
+    repair_result = repair_loop(
+        issue=issue,
+        changed_files=fix["changes"],
+        test_command="uv run pytest tests/",
+    )
+
+    # --------------------------------------------------
+    # 11. Handle test/repair result
+    # --------------------------------------------------
+
+    if not repair_result["success"]:
+
+        print(
+            "\n   Autonomous repair failed."
+        )
+
+        print(
+            "   Aborting before Git operations."
+        )
+
+        return
+
+    print(
+        "\n   Tests passed!"
+    )
+
+    # IMPORTANT:
+    # The repair loop may have modified the files.
+    # Therefore, use the final repaired changes.
+    fix["changes"] = repair_result[
+        "final_changes"
+    ]
+
+    print(
+        f"   Final files: "
+        f"{[change['path'] for change in fix['changes']]}"
+    )
+
+    # --------------------------------------------------
+    # 12. Create Git branch
     # --------------------------------------------------
 
     branch_name = thread_id
 
     print(
-        f"\n8. Creating branch "
+        f"\n9. Creating branch "
         f"'{branch_name}'..."
     )
 
@@ -340,7 +404,7 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 11. Check sensitive files
+    # 13. Check sensitive files
     # --------------------------------------------------
 
     sensitive_files = [
@@ -352,8 +416,12 @@ def solve_issue(repo, issue_number):
     ]
 
     # --------------------------------------------------
-    # 12. Commit changes
+    # 14. Commit changes
     # --------------------------------------------------
+
+    print(
+        "\n10. Committing changes..."
+    )
 
     commit_result = git_operations.invoke(
         {
@@ -375,8 +443,12 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 13. Push branch
+    # 15. Push branch
     # --------------------------------------------------
+
+    print(
+        "\n11. Pushing branch..."
+    )
 
     push_result = git_operations.invoke(
         {
@@ -390,8 +462,12 @@ def solve_issue(repo, issue_number):
     )
 
     # --------------------------------------------------
-    # 14. Create Pull Request
+    # 16. Create Pull Request
     # --------------------------------------------------
+
+    print(
+        "\n12. Creating Pull Request..."
+    )
 
     pr_result = git_operations.invoke(
         {
@@ -409,6 +485,19 @@ def solve_issue(repo, issue_number):
         f"   create_pr: {pr_result}"
     )
 
+    # --------------------------------------------------
+    # DONE
+    # --------------------------------------------------
+
     print(
-        "\nDone."
+        "\n"
+        + "=" * 60
+    )
+
+    print(
+        "AUTONOMOUS CODING WORKFLOW COMPLETE"
+    )
+
+    print(
+        "=" * 60
     )

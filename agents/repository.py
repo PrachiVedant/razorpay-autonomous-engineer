@@ -41,8 +41,17 @@ def read_file(filepath):
 
 
 def write_file(filepath, content):
-    """Write content to a file."""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w") as f:
+    directory = os.path.dirname(filepath)
+
+    if directory:
+        os.makedirs(
+            directory,
+            exist_ok=True,
+        )
+
+    with open(
+        filepath,
+        "w",
+        encoding="utf-8",
+    ) as f:
         f.write(content)
-    return f"Written to {filepath}"
