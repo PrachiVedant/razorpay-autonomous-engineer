@@ -1,0 +1,17 @@
+[
+    {
+        "product_id": "product_001",
+        "name": "Everyday T-Shirt",
+        "price": 499
+    },
+    {
+        "product_id": "product_002",
+        "name": "Premium Hoodie",
+        "price": 1299
+    },
+    {
+        "product_id": "product_003",
+        "name": "Running Shoes",
+        "price": 2499
+    }
+]

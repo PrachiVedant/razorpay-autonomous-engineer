@@ -1,0 +1,58 @@
+[
+    {
+        "payment_id": "pay_001",
+        "order_id": "order_001",
+        "amount": 499,
+        "method": "upi",
+        "status": "success"
+    },
+    {
+        "payment_id": "pay_002",
+        "order_id": "order_002",
+        "amount": 1299,
+        "method": "upi",
+        "status": "success"
+    },
+    {
+        "payment_id": "pay_003",
+        "order_id": "order_003",
+        "amount": 499,
+        "method": "card",
+        "status": "failed"
+    },
+    {
+        "payment_id": "pay_004",
+        "order_id": "order_004",
+        "amount": 2499,
+        "method": "card",
+        "status": "failed"
+    },
+    {
+        "payment_id": "pay_005",
+        "order_id": "order_005",
+        "amount": 1299,
+        "method": "upi",
+        "status": "success"
+    },
+    {
+        "payment_id": "pay_006",
+        "order_id": "order_006",
+        "amount": 2499,
+        "method": "card",
+        "status": "failed"
+    },
+    {
+        "payment_id": "pay_007",
+        "order_id": "order_007",
+        "amount": 499,
+        "method": "upi",
+        "status": "success"
+    },
+    {
+        "payment_id": "pay_008",
+        "order_id": "order_008",
+        "amount": 1299,
+        "method": "card",
+        "status": "failed"
+    }
+]

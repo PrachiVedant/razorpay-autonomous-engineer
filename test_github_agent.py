@@ -1,5 +1,7 @@
 import agents.github_agent as github_agent
 
+from agents.llm import OpenAIProvider
+
 
 # --------------------------------------------------
 # Fake GitHub issue
@@ -124,38 +126,125 @@ github_agent.git_operations = (
 
 
 # --------------------------------------------------
+# Mock LLM
+# --------------------------------------------------
+
+planner_response = """
+{
+    "approach": "Fix the calculator addition function.",
+    "files_to_read": [
+        "calculator.py",
+        "tests/test_sample.py"
+    ],
+    "requires_razorpay": false,
+    "payment_operation": null,
+    "risk_level": "low",
+    "requires_human_approval": false
+}
+"""
+
+
+generator_response = """
+{
+    "changes": [
+        {
+            "path": "calculator.py",
+            "content": "def add(a, b):\\n    return a + b\\n"
+        }
+    ],
+    "pr_description": "Fixed the calculator addition function to return the sum of two numbers."
+}
+"""
+
+
+repair_response = """
+{
+    "reasoning": "The generated code should add the two numbers.",
+    "changes": [
+        {
+            "path": "calculator.py",
+            "content": "def add(a, b):\\n    return a + b\\n"
+        }
+    ]
+}
+"""
+
+
+original_generate = OpenAIProvider.generate
+
+
+def mock_generate(
+    self,
+    prompt,
+    model=None,
+    max_tokens=None,
+):
+    """
+    Return deterministic responses for the
+    different LLM stages.
+    """
+
+    if '"pr_description"' in prompt:
+        print(
+            "[MOCK LLM] Returning generator response"
+        )
+
+        return generator_response
+
+    if '"reasoning"' in prompt:
+        print(
+            "[MOCK LLM] Returning repair response"
+        )
+
+        return repair_response
+
+    print(
+        "[MOCK LLM] Returning planner response"
+    )
+
+    return planner_response
+
+
+OpenAIProvider.generate = mock_generate
+
+
+# --------------------------------------------------
 # Run workflow
 # --------------------------------------------------
 
-print(
-    "\n"
-    + "=" * 60
-)
+try:
 
-print(
-    "GITHUB AGENT INTEGRATION TEST"
-)
+    print(
+        "\n"
+        + "=" * 60
+    )
 
-print(
-    "=" * 60
-)
+    print(
+        "GITHUB AGENT INTEGRATION TEST"
+    )
 
+    print(
+        "=" * 60
+    )
 
-github_agent.solve_issue(
-    repo="test/repository",
-    issue_number=1,
-)
+    github_agent.solve_issue(
+        repo="test/repository",
+        issue_number=1,
+    )
 
+    print(
+        "\n"
+        + "=" * 60
+    )
 
-print(
-    "\n"
-    + "=" * 60
-)
+    print(
+        "GITHUB AGENT TEST COMPLETE"
+    )
 
-print(
-    "GITHUB AGENT TEST COMPLETE"
-)
+    print(
+        "=" * 60
+    )
 
-print(
-    "=" * 60
-)
+finally:
+
+    OpenAIProvider.generate = original_generate

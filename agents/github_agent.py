@@ -17,6 +17,7 @@ from agents.repository import (
 
 from agents.planner import plan_issue
 from agents.code_generator import generate_fix
+from agents.audit import audit_logger
 
 from razorpay.policy import validate_payment_plan
 from razorpay.validator import validate_changes
@@ -26,7 +27,7 @@ def solve_issue(repo, issue_number):
     """
     Orchestrate the autonomous coding workflow.
 
-    Flow:
+    The workflow is:
 
         GitHub Issue
             ↓
@@ -48,30 +49,28 @@ def solve_issue(repo, issue_number):
             ↓
         Run Tests
             ↓
-        ┌─────────────────┐
-        │                 │
-       PASS              FAIL
-        │                 │
-        ↓                 ↓
-       Git            Repair Agent
-                         ↓
-                     Run Tests
-                         ↓
-                       PASS
-                         ↓
-                        Git
-                         ↓
-                        PR
-    """
+        Repair Agent if needed
+            ↓
+        Git Branch
+            ↓
+        Commit
+            ↓
+        Push
+            ↓
+        Pull Request
 
-    # --------------------------------------------------
-    # 1. Fetch GitHub issue
-    # --------------------------------------------------
+    All important workflow transitions are recorded
+    in the audit trail.
+    """
 
     thread_id = (
         f"{repo.replace('/', '-')}"
         f"-issue-{issue_number}"
     )
+
+    # --------------------------------------------------
+    # 1. Fetch GitHub issue
+    # --------------------------------------------------
 
     print(
         f"\n1. Fetching GitHub issue #{issue_number}..."
@@ -90,6 +89,16 @@ def solve_issue(repo, issue_number):
         f"   Thread ID: {thread_id}"
     )
 
+    audit_logger.log(
+        "ISSUE_RECEIVED",
+        details={
+            "repo": repo,
+            "issue_number": issue_number,
+            "thread_id": thread_id,
+            "title": issue["title"],
+        },
+    )
+
     # --------------------------------------------------
     # 2. Read repository structure
     # --------------------------------------------------
@@ -99,6 +108,13 @@ def solve_issue(repo, issue_number):
     )
 
     structure = get_repo_structure()
+
+    audit_logger.log(
+        "REPOSITORY_ANALYZED",
+        details={
+            "thread_id": thread_id,
+        },
+    )
 
     # --------------------------------------------------
     # 3. Plan issue
@@ -122,6 +138,18 @@ def solve_issue(repo, issue_number):
         f"{plan['files_to_read']}"
     )
 
+    audit_logger.log(
+        "PLAN_CREATED",
+        details={
+            "thread_id": thread_id,
+            "files_to_read": plan["files_to_read"],
+            "requires_razorpay": plan.get(
+                "requires_razorpay",
+                False,
+            ),
+        },
+    )
+
     # --------------------------------------------------
     # 4. Razorpay risk classification
     # --------------------------------------------------
@@ -129,6 +157,35 @@ def solve_issue(repo, issue_number):
     payment_policy = validate_payment_plan(
         plan
     )
+
+    if not payment_policy["allowed"]:
+
+        print(
+            "\nPayment policy rejected the plan."
+        )
+
+        print(
+            f"Reason: "
+            f"{payment_policy['reason']}"
+        )
+
+        audit_logger.log(
+            "PAYMENT_POLICY_REJECTED",
+            status="FAIL",
+            details={
+                "reason": payment_policy["reason"],
+            },
+        )
+
+        audit_logger.log(
+            "WORKFLOW_ABORTED",
+            status="FAIL",
+            details={
+                "reason": "Payment policy rejected plan.",
+            },
+        )
+
+        return
 
     if plan.get(
         "requires_razorpay",
@@ -154,6 +211,21 @@ def solve_issue(repo, issue_number):
             f"{payment_policy['requires_approval']}"
         )
 
+        audit_logger.log(
+            "PAYMENT_RISK_CLASSIFIED",
+            details={
+                "operation": plan.get(
+                    "payment_operation"
+                ),
+                "risk_level": plan.get(
+                    "risk_level"
+                ),
+                "requires_approval": payment_policy[
+                    "requires_approval"
+                ],
+            },
+        )
+
     # --------------------------------------------------
     # 5. Read relevant files
     # --------------------------------------------------
@@ -176,6 +248,13 @@ def solve_issue(repo, issue_number):
             f"   Read: {filepath}"
         )
 
+    audit_logger.log(
+        "FILES_READ",
+        details={
+            "files": list(file_content.keys()),
+        },
+    )
+
     # --------------------------------------------------
     # 6. Generate code changes
     # --------------------------------------------------
@@ -195,6 +274,19 @@ def solve_issue(repo, issue_number):
         f"{len(fix['changes'])} file change(s)"
     )
 
+    audit_logger.log(
+        "CODE_GENERATED",
+        details={
+            "files": [
+                change["path"]
+                for change in fix["changes"]
+            ],
+            "num_changes": len(
+                fix["changes"]
+            ),
+        },
+    )
+
     # --------------------------------------------------
     # 7. Validate generated changes
     # --------------------------------------------------
@@ -202,8 +294,6 @@ def solve_issue(repo, issue_number):
     print(
         "\n6. Validating generated changes..."
     )
-
-    # GitHub/security validation
 
     try:
 
@@ -217,9 +307,24 @@ def solve_issue(repo, issue_number):
             f"Aborting: {error}"
         )
 
-        return
+        audit_logger.log(
+            "SECURITY_VALIDATION_FAILED",
+            status="FAIL",
+            details={
+                "validator": "github",
+                "reason": str(error),
+            },
+        )
 
-    # Razorpay security validation
+        audit_logger.log(
+            "WORKFLOW_ABORTED",
+            status="FAIL",
+            details={
+                "reason": "GitHub change validation failed.",
+            },
+        )
+
+        return
 
     razorpay_validation = validate_changes(
         fix["changes"]
@@ -237,6 +342,25 @@ def solve_issue(repo, issue_number):
                 f"   - {error}"
             )
 
+        audit_logger.log(
+            "SECURITY_VALIDATION_FAILED",
+            status="FAIL",
+            details={
+                "validator": "razorpay",
+                "error_count": len(
+                    razorpay_validation["errors"]
+                ),
+            },
+        )
+
+        audit_logger.log(
+            "WORKFLOW_ABORTED",
+            status="FAIL",
+            details={
+                "reason": "Razorpay security validation failed.",
+            },
+        )
+
         print(
             "\nAborting before applying changes."
         )
@@ -245,6 +369,17 @@ def solve_issue(repo, issue_number):
 
     print(
         "   Validation passed."
+    )
+
+    audit_logger.log(
+        "SECURITY_VALIDATION_PASSED",
+        status="PASS",
+        details={
+            "files": [
+                change["path"]
+                for change in fix["changes"]
+            ],
+        },
     )
 
     # --------------------------------------------------
@@ -291,6 +426,22 @@ def solve_issue(repo, issue_number):
                 f"   - {change['path']}"
             )
 
+        audit_logger.log(
+            "HUMAN_APPROVAL_REQUIRED",
+            details={
+                "operation": plan.get(
+                    "payment_operation"
+                ),
+                "risk_level": plan.get(
+                    "risk_level"
+                ),
+                "files": [
+                    change["path"]
+                    for change in fix["changes"]
+                ],
+            },
+        )
+
         approval = input(
             "\nApprove these payment changes? "
             "[y/N]: "
@@ -310,10 +461,38 @@ def solve_issue(repo, issue_number):
                 "the repository."
             )
 
+            audit_logger.log(
+                "HUMAN_APPROVAL_DENIED",
+                status="FAIL",
+                details={
+                    "operation": plan.get(
+                        "payment_operation"
+                    ),
+                },
+            )
+
+            audit_logger.log(
+                "WORKFLOW_ABORTED",
+                status="FAIL",
+                details={
+                    "reason": "Human approval denied.",
+                },
+            )
+
             return
 
         print(
             "\nHuman approval granted."
+        )
+
+        audit_logger.log(
+            "HUMAN_APPROVAL_GRANTED",
+            status="PASS",
+            details={
+                "operation": plan.get(
+                    "payment_operation"
+                ),
+            },
         )
 
     # --------------------------------------------------
@@ -335,6 +514,17 @@ def solve_issue(repo, issue_number):
             f"   Updated: "
             f"{change['path']}"
         )
+
+    audit_logger.log(
+        "CHANGES_APPLIED",
+        status="PASS",
+        details={
+            "files": [
+                change["path"]
+                for change in fix["changes"]
+            ],
+        },
+    )
 
     # --------------------------------------------------
     # 10. Run tests + autonomous repair
@@ -364,15 +554,21 @@ def solve_issue(repo, issue_number):
             "   Aborting before Git operations."
         )
 
+        audit_logger.log(
+            "WORKFLOW_ABORTED",
+            status="FAIL",
+            details={
+                "reason": "Autonomous repair failed.",
+                "attempts": repair_result["attempts"],
+            },
+        )
+
         return
 
     print(
         "\n   Tests passed!"
     )
 
-    # IMPORTANT:
-    # The repair loop may have modified the files.
-    # Therefore, use the final repaired changes.
     fix["changes"] = repair_result[
         "final_changes"
     ]
@@ -380,6 +576,18 @@ def solve_issue(repo, issue_number):
     print(
         f"   Final files: "
         f"{[change['path'] for change in fix['changes']]}"
+    )
+
+    audit_logger.log(
+        "REPAIR_LOOP_COMPLETED",
+        status="PASS",
+        details={
+            "attempts": repair_result["attempts"],
+            "files": [
+                change["path"]
+                for change in fix["changes"]
+            ],
+        },
     )
 
     # --------------------------------------------------
@@ -401,6 +609,14 @@ def solve_issue(repo, issue_number):
         f"   git checkout -b "
         f"{branch_name}: "
         f"{checkout_result}"
+    )
+
+    audit_logger.log(
+        "GIT_BRANCH_CREATED",
+        status="PASS",
+        details={
+            "branch": branch_name,
+        },
     )
 
     # --------------------------------------------------
@@ -442,6 +658,16 @@ def solve_issue(repo, issue_number):
         f"   commit: {commit_result}"
     )
 
+    audit_logger.log(
+        "GIT_COMMIT_CREATED",
+        status="PASS",
+        details={
+            "num_files_changed": len(
+                fix["changes"]
+            ),
+        },
+    )
+
     # --------------------------------------------------
     # 15. Push branch
     # --------------------------------------------------
@@ -459,6 +685,14 @@ def solve_issue(repo, issue_number):
 
     print(
         f"   push: {push_result}"
+    )
+
+    audit_logger.log(
+        "GIT_PUSHED",
+        status="PASS",
+        details={
+            "branch": branch_name,
+        },
     )
 
     # --------------------------------------------------
@@ -485,9 +719,28 @@ def solve_issue(repo, issue_number):
         f"   create_pr: {pr_result}"
     )
 
+    audit_logger.log(
+        "PULL_REQUEST_CREATED",
+        status="PASS",
+        details={
+            "repo": repo,
+            "branch": branch_name,
+        },
+    )
+
     # --------------------------------------------------
     # DONE
     # --------------------------------------------------
+
+    audit_logger.log(
+        "WORKFLOW_COMPLETED",
+        status="PASS",
+        details={
+            "repo": repo,
+            "issue_number": issue_number,
+            "branch": branch_name,
+        },
+    )
 
     print(
         "\n"

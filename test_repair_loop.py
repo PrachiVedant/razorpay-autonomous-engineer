@@ -1,46 +1,50 @@
 from agents.repair_loop import repair_loop
-from agents.repository import write_file
+from agents.llm import OpenAIProvider
 
 
-issue = {
-    "title": "Fix addition function",
-    "body": "The add function should return the sum of two numbers."
-}
-
-
-changed_files = [
-    {
-        "path": "calculator.py",
-        "content": """def add(a, b):
-    return a - b
-"""
+def test_repair_loop():
+    issue = {
+        "title": "Fix addition function",
+        "body": "The add function should return the sum of two numbers.",
     }
-]
 
+    changed_files = [
+        {
+            "path": "calculator.py",
+            "content": """def add(a, b):
+    return a - b
+""",
+        }
+    ]
 
-# Create the intentionally broken file
-write_file(
-    "calculator.py",
-    changed_files[0]["content"],
-)
+    fake_response = """
+{
+    "reasoning": "The function uses subtraction instead of addition.",
+    "changes": [
+        {
+            "path": "calculator.py",
+            "content": "def add(a, b):\\n    return a + b\\n"
+        }
+    ]
+}
+"""
 
+    original_generate = OpenAIProvider.generate
 
-result = repair_loop(
-    issue=issue,
-    changed_files=changed_files,
-    test_command="pytest tests/",
-)
+    def mock_generate(self, prompt, model=None, max_tokens=None):
+        return fake_response
 
+    OpenAIProvider.generate = mock_generate
 
-print("\n")
-print("=" * 60)
-print("FINAL RESULT")
-print("=" * 60)
+    try:
+        result = repair_loop(
+            issue=issue,
+            changed_files=changed_files,
+            test_command="pytest tests/",
+        )
 
-print(
-    f"Success: {result['success']}"
-)
+        assert "success" in result
+        assert "attempts" in result
 
-print(
-    f"Attempts: {result['attempts']}"
-)
+    finally:
+        OpenAIProvider.generate = original_generate

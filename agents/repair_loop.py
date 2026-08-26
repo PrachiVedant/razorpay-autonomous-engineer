@@ -1,6 +1,10 @@
+from agents.audit import audit_logger
 from agents.test_runner import run_tests
 from agents.repair import repair_code
 from agents.repository import read_file, write_file
+from agents.audit import audit_logger
+
+from razorpay.validator import validate_changes
 
 
 MAX_RETRIES = 3
@@ -16,11 +20,9 @@ def is_allowed_repair_path(path, allowed_paths):
 
     normalized = path.replace("\\", "/")
 
-    # Must be one of the originally changed files
     if path not in allowed_paths:
         return False
 
-    # Never allow modification of tests
     if normalized.startswith("tests/"):
         return False
 
@@ -41,21 +43,15 @@ def repair_loop(
     The repair agent is restricted to the files
     originally changed by the coding agent.
 
-    Returns:
-        {
-            "success": bool,
-            "attempts": int,
-            "final_changes": list,
-            "test_output": str,
-        }
+    Every repair is passed through the deterministic
+    Razorpay security validator before being applied.
+
+    Important:
+    The audit trail records workflow metadata only.
+    It must never contain secrets or file contents.
     """
 
     attempts = 0
-
-    # --------------------------------------------------
-    # Files that the repair agent is allowed to modify
-    # during the ENTIRE repair loop.
-    # --------------------------------------------------
 
     allowed_paths = {
         change["path"]
@@ -63,6 +59,14 @@ def repair_loop(
     }
 
     test_output = ""
+
+    audit_logger.log(
+        "REPAIR_LOOP_STARTED",
+        details={
+            "files": list(allowed_paths),
+            "max_retries": MAX_RETRIES,
+        },
+    )
 
     while attempts < MAX_RETRIES:
 
@@ -79,6 +83,14 @@ def repair_loop(
 
         print(
             f"{'=' * 60}"
+        )
+
+        audit_logger.log(
+            "TEST_STARTED",
+            details={
+                "attempt": attempts,
+                "test_command": test_command,
+            },
         )
 
         # -----------------------------------------
@@ -104,6 +116,22 @@ def repair_loop(
                 "\nAll tests passed!"
             )
 
+            audit_logger.log(
+                "TEST_PASSED",
+                status="PASS",
+                details={
+                    "attempt": attempts,
+                },
+            )
+
+            audit_logger.log(
+                "REPAIR_LOOP_COMPLETED",
+                status="PASS",
+                details={
+                    "attempts": attempts,
+                },
+            )
+
             return {
                 "success": True,
                 "attempts": attempts,
@@ -123,6 +151,14 @@ def repair_loop(
             result["stdout"]
             + "\n"
             + result["stderr"]
+        )
+
+        audit_logger.log(
+            "TEST_FAILED",
+            status="FAIL",
+            details={
+                "attempt": attempts,
+            },
         )
 
         print(
@@ -148,6 +184,13 @@ def repair_loop(
         # 5. Ask repair agent for a fix
         # -----------------------------------------
 
+        audit_logger.log(
+            "REPAIR_STARTED",
+            details={
+                "attempt": attempts,
+                "files": list(file_contents.keys()),
+            },
+        )
 
         print(
             "\n[REPAIR LOOP] Calling repair agent...",
@@ -155,7 +198,8 @@ def repair_loop(
         )
 
         print(
-            f"[REPAIR LOOP] Files: {list(file_contents.keys())}",
+            f"[REPAIR LOOP] Files: "
+            f"{list(file_contents.keys())}",
             flush=True,
         )
 
@@ -192,10 +236,21 @@ def repair_loop(
                 "no changes."
             )
 
-            print(
-                "The failure may be caused by "
-                "the environment or may be "
-                "outside the allowed repair scope."
+            audit_logger.log(
+                "REPAIR_NO_CHANGES",
+                status="FAIL",
+                details={
+                    "attempt": attempts,
+                },
+            )
+
+            audit_logger.log(
+                "REPAIR_LOOP_ABORTED",
+                status="FAIL",
+                details={
+                    "reason": "No repair changes returned.",
+                    "attempt": attempts,
+                },
             )
 
             return {
@@ -212,12 +267,41 @@ def repair_loop(
 
         for change in new_changes:
 
-            path = change["path"]
+            path = change.get(
+                "path",
+                ""
+            )
+
+            if not path:
+
+                audit_logger.log(
+                    "REPAIR_SECURITY_REJECTED",
+                    status="FAIL",
+                    details={
+                        "reason": "Missing file path.",
+                        "attempt": attempts,
+                    },
+                )
+
+                raise RuntimeError(
+                    "Repair agent returned "
+                    "a change without a file path."
+                )
 
             if not is_allowed_repair_path(
                 path,
                 allowed_paths,
             ):
+
+                audit_logger.log(
+                    "REPAIR_SECURITY_REJECTED",
+                    status="FAIL",
+                    details={
+                        "reason": "Unauthorized repair path.",
+                        "path": path,
+                        "attempt": attempts,
+                    },
+                )
 
                 raise RuntimeError(
                     "Repair agent attempted "
@@ -226,7 +310,81 @@ def repair_loop(
                 )
 
         # -----------------------------------------
-        # 8. Print repair reasoning
+        # 8. SECURITY:
+        # Validate repaired code
+        # -----------------------------------------
+
+        print(
+            "\nValidating repair "
+            "with security validator..."
+        )
+
+        security_validation = validate_changes(
+            new_changes
+        )
+
+        if not security_validation["valid"]:
+
+            print(
+                "\nRepair rejected by "
+                "Razorpay security validator."
+            )
+
+            for error in security_validation["errors"]:
+
+                print(
+                    f"   - {error}"
+                )
+
+            audit_logger.log(
+                "REPAIR_SECURITY_REJECTED",
+                status="FAIL",
+                details={
+                    "attempt": attempts,
+                    "error_count": len(
+                        security_validation["errors"]
+                    ),
+                },
+            )
+
+            audit_logger.log(
+                "REPAIR_LOOP_ABORTED",
+                status="FAIL",
+                details={
+                    "reason": "Security validation failed.",
+                    "attempt": attempts,
+                },
+            )
+
+            print(
+                "\nRepair will NOT be applied."
+            )
+
+            return {
+                "success": False,
+                "attempts": attempts,
+                "final_changes": changed_files,
+                "test_output": test_output,
+            }
+
+        print(
+            "   Security validation passed."
+        )
+
+        audit_logger.log(
+            "REPAIR_SECURITY_VALIDATED",
+            status="PASS",
+            details={
+                "attempt": attempts,
+                "files": [
+                    change["path"]
+                    for change in new_changes
+                ],
+            },
+        )
+
+        # -----------------------------------------
+        # 9. Print repair reasoning
         # -----------------------------------------
 
         print(
@@ -241,7 +399,7 @@ def repair_loop(
         )
 
         # -----------------------------------------
-        # 9. Detect no-op repairs
+        # 10. Detect no-op repairs
         # -----------------------------------------
 
         actual_changes = []
@@ -268,7 +426,7 @@ def repair_loop(
             )
 
         # -----------------------------------------
-        # 10. Stop if repair changed nothing
+        # 11. Stop if repair changed nothing
         # -----------------------------------------
 
         if not actual_changes:
@@ -276,6 +434,23 @@ def repair_loop(
             print(
                 "\nRepair agent produced "
                 "no effective changes."
+            )
+
+            audit_logger.log(
+                "REPAIR_NO_EFFECTIVE_CHANGE",
+                status="FAIL",
+                details={
+                    "attempt": attempts,
+                },
+            )
+
+            audit_logger.log(
+                "REPAIR_LOOP_ABORTED",
+                status="FAIL",
+                details={
+                    "reason": "Repair produced no effective changes.",
+                    "attempt": attempts,
+                },
             )
 
             print(
@@ -291,7 +466,7 @@ def repair_loop(
             }
 
         # -----------------------------------------
-        # 11. Apply repair
+        # 12. Apply repair
         # -----------------------------------------
 
         print(
@@ -310,8 +485,20 @@ def repair_loop(
                 f"{change['path']}"
             )
 
+        audit_logger.log(
+            "REPAIR_APPLIED",
+            status="PASS",
+            details={
+                "attempt": attempts,
+                "files": [
+                    change["path"]
+                    for change in actual_changes
+                ],
+            },
+        )
+
         # -----------------------------------------
-        # 12. Update current changes
+        # 13. Update current changes
         # -----------------------------------------
 
         changed_files = actual_changes
@@ -322,6 +509,15 @@ def repair_loop(
 
     print(
         "\nMaximum repair attempts reached."
+    )
+
+    audit_logger.log(
+        "REPAIR_LOOP_ABORTED",
+        status="FAIL",
+        details={
+            "reason": "Maximum retry limit reached.",
+            "attempts": attempts,
+        },
     )
 
     return {

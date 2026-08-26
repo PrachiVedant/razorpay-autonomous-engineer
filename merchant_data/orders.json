@@ -1,0 +1,58 @@
+[
+    {
+        "order_id": "order_001",
+        "customer_id": "customer_001",
+        "product_id": "product_001",
+        "amount": 499,
+        "status": "paid"
+    },
+    {
+        "order_id": "order_002",
+        "customer_id": "customer_002",
+        "product_id": "product_002",
+        "amount": 1299,
+        "status": "paid"
+    },
+    {
+        "order_id": "order_003",
+        "customer_id": "customer_003",
+        "product_id": "product_001",
+        "amount": 499,
+        "status": "abandoned"
+    },
+    {
+        "order_id": "order_004",
+        "customer_id": "customer_004",
+        "product_id": "product_003",
+        "amount": 2499,
+        "status": "abandoned"
+    },
+    {
+        "order_id": "order_005",
+        "customer_id": "customer_005",
+        "product_id": "product_002",
+        "amount": 1299,
+        "status": "paid"
+    },
+    {
+        "order_id": "order_006",
+        "customer_id": "customer_006",
+        "product_id": "product_003",
+        "amount": 2499,
+        "status": "abandoned"
+    },
+    {
+        "order_id": "order_007",
+        "customer_id": "customer_007",
+        "product_id": "product_001",
+        "amount": 499,
+        "status": "paid"
+    },
+    {
+        "order_id": "order_008",
+        "customer_id": "customer_008",
+        "product_id": "product_002",
+        "amount": 1299,
+        "status": "abandoned"
+    }
+]
