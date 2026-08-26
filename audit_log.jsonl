@@ -753,3 +753,315 @@
 {"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
 {"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
 {"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:28.039297+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:07:28.395623+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:07:28.395623+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:28.395623+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:07:28.395623+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:28.396618+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:07:28.397690+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:28.397690+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:28.397690+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:07:28.397690+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:07:28.398618+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:07:28.399616+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:28.399616+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:28.399616+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:28.399616+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:28.399616+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:29.236257+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T08:07:29.236257+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T08:07:31.859291+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:07:32.268101+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:07:32.268101+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:32.269097+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:07:32.269097+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:32.269097+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:07:32.270097+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:32.271097+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:32.271097+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:07:32.271097+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:07:32.271097+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:07:32.271097+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:32.272097+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:32.272097+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:32.272097+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:32.272097+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:32.718245+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T08:07:32.719246+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:32.774062+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:07:33.233786+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:07:33.233786+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:33.233786+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:07:33.234739+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:33.234739+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:07:33.236742+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:33.236742+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:33.236742+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:07:33.236742+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:07:33.237802+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:07:33.237802+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:33.237802+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:07:33.237802+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:33.238732+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:07:33.238732+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:44.834612+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T14:41:45.243492+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T14:41:45.244548+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:45.244548+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T14:41:45.244548+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:45.244548+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T14:41:45.246562+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:45.246562+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:45.246562+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T14:41:45.246562+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T14:41:45.247566+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T14:41:45.247566+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:45.247566+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:45.247566+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:45.247566+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:45.248568+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:46.154088+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T14:41:46.154088+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T14:41:49.014652+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T14:41:49.391916+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T14:41:49.391916+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:49.391916+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T14:41:49.391916+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:49.393159+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T14:41:49.394528+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:49.394935+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:49.394935+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T14:41:49.394935+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T14:41:49.394935+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T14:41:49.394935+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:49.395917+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:49.395917+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:49.395917+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:49.395917+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:49.890252+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T14:41:49.891251+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:49.914249+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T14:41:50.416768+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T14:41:50.416768+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:50.417821+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T14:41:50.417821+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:50.417821+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T14:41:50.418770+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:50.419771+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:41:50.421323+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:50.421768+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:41:50.421768+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:48:04.703334+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T14:48:05.428668+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T14:48:05.428668+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:48:05.428668+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T14:54:13.359989+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T14:54:13.918261+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T14:54:13.918261+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:54:13.918261+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T14:54:13.919260+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:54:13.919260+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T14:54:13.920257+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:54:13.921257+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:54:13.921257+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T14:54:13.921257+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T14:54:13.921257+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T14:54:13.922260+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:54:13.922260+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T14:54:13.922260+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:54:13.923263+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T14:54:13.923263+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:03:36.138518+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:03:36.138518+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:03:36.138518+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:03:36.139517+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:03:36.139517+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:03:36.139517+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:03:36.141519+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:03:36.142518+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:03:36.142518+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:03:36.142518+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:04:30.707940+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:04:30.707940+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:04:30.707940+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:04:30.708942+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:04:30.708942+00:00", "event": "PAYMENT_LINK_CREATION_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "RAZORPAY_KEY_ID is not configured.", "mode": "test"}}
+{"timestamp": "2026-08-26T15:04:30.708942+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "payment_link_creation", "reason": "RAZORPAY_KEY_ID is not configured."}}
+{"timestamp": "2026-08-26T15:15:10.208777+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T15:15:10.754028+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T15:15:10.755036+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:10.755036+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T15:15:10.755036+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:10.756026+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T15:15:10.757026+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:10.757026+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:10.758032+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T15:15:10.758032+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T15:15:10.758032+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T15:15:10.758032+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:10.759028+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:10.759028+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:10.759028+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:10.759028+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:10.766026+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:15:10.766026+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:15:10.767028+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:15:10.767028+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:15:10.767028+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:15:10.767028+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:15:10.769027+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:15:10.770034+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:15:10.770034+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:15:10.770034+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:15:40.766131+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T15:15:41.255967+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T15:15:41.255967+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:41.255967+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T15:15:41.256951+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:41.256951+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T15:15:41.257974+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:41.258957+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:41.258957+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T15:15:41.258957+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T15:15:41.258957+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T15:15:41.259969+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:41.259969+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:15:41.259969+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:41.259969+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:41.259969+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:15:41.265555+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:15:41.266440+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:15:41.266440+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:15:41.266440+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:15:41.267450+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:15:41.267450+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:15:41.270094+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:15:41.279402+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:15:41.279402+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:15:41.279402+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:19:22.974964+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T15:19:23.488851+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T15:19:23.489846+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:19:23.489846+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T15:19:23.489846+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:19:23.490846+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T15:19:23.491845+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:19:23.491845+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:19:23.491845+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T15:19:23.492846+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T15:19:23.492846+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T15:19:23.492846+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:19:23.493845+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:19:23.493845+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:19:23.493845+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:19:23.493845+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:19:23.500844+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:19:23.500844+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:19:23.501843+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:19:23.501843+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:19:23.501843+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:19:23.502843+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:19:23.503843+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:19:23.503843+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:19:23.504843+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:19:23.504843+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:19:30.670026+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:19:30.670026+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:19:30.671027+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:19:30.671027+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:19:32.069182+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_TURfnn21pt9Fqo", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:19:32.070181+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_TURfnn21pt9Fqo", "amount": 55000}}
+{"timestamp": "2026-08-26T15:22:27.847365+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T15:22:28.318235+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T15:22:28.319236+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:22:28.319236+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T15:22:28.319236+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:22:28.319236+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T15:22:28.321232+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:22:28.321232+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:22:28.321232+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T15:22:28.322232+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T15:22:28.322232+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T15:22:28.322232+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:22:28.322232+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:22:28.323231+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:22:28.323231+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:22:28.323231+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:22:28.332233+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:22:28.332233+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:22:28.332233+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:22:28.332233+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:22:28.333234+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:22:28.333234+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:22:28.334237+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:22:28.335237+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:22:28.335237+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:22:28.335237+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:22:46.562849+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:22:46.562849+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:22:46.563855+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:22:46.563855+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell", "mode": "test"}}
+{"timestamp": "2026-08-26T15:22:47.483109+00:00", "event": "PAYMENT_LINK_CREATION_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "payment link with given reference_id: demo-merchant-growth-upsell already exists. Please create a payment link with a different reference_id", "mode": "test"}}
+{"timestamp": "2026-08-26T15:22:47.484109+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "payment_link_creation", "reason": "payment link with given reference_id: demo-merchant-growth-upsell already exists. Please create a payment link with a different reference_id", "recovery_action": "Stopped safely without reporting a payment link."}}
+{"timestamp": "2026-08-26T15:25:15.227032+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T15:25:15.748053+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T15:25:15.748053+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:25:15.749066+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false, "payment_operation": null, "risk_level": null}}
+{"timestamp": "2026-08-26T15:25:15.749066+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:25:15.749066+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T15:25:15.750065+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:25:15.751079+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:25:15.751079+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T15:25:15.751079+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T15:25:15.751079+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T15:25:15.752063+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:25:15.752063+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T15:25:15.752063+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:25:15.752063+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:25:15.753072+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T15:25:15.757086+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:25:15.758085+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:25:15.758085+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:25:15.758085+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell-847fba92", "mode": "test"}}
+{"timestamp": "2026-08-26T15:25:15.759081+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "reference_id": "demo-merchant-growth-upsell-847fba92", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:25:15.759081+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_test_123", "amount": 55000}}
+{"timestamp": "2026-08-26T15:25:15.760458+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:25:15.760458+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 15000, "final_amount": 65000}}
+{"timestamp": "2026-08-26T15:25:15.761466+00:00", "event": "UPSELL_POLICY_REJECTED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "reason": "Upsell exceeds the maximum allowed limit of 10.0%.", "upsell_percentage": 30.0}}
+{"timestamp": "2026-08-26T15:25:15.761466+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant", "stage": "upsell_policy", "reason": "Upsell exceeds the maximum allowed limit of 10.0%."}}
+{"timestamp": "2026-08-26T15:25:21.741734+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:25:21.741734+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:25:21.741734+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:25:21.743060+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-growth-upsell-7ec87507", "mode": "test"}}
+{"timestamp": "2026-08-26T15:25:22.535860+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_TURlymaQLdKlps", "reference_id": "demo-merchant-growth-upsell-7ec87507", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:25:22.536860+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant", "payment_link_id": "plink_TURlymaQLdKlps", "amount": 55000}}
+{"timestamp": "2026-08-26T15:25:29.376257+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:25:29.377254+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:25:29.377254+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-failure", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:25:29.377254+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-failure-growth-upsell-a108ac07", "mode": "test"}}
+{"timestamp": "2026-08-26T15:25:29.378254+00:00", "event": "PAYMENT_LINK_CREATION_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant-failure", "reason": "Controlled Razorpay Test Mode API failure for graceful-failure demonstration.", "mode": "test", "reference_id": "demo-merchant-failure-growth-upsell-a108ac07"}}
+{"timestamp": "2026-08-26T15:25:29.378254+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant-failure", "stage": "payment_link_creation", "reason": "Controlled Razorpay Test Mode API failure for graceful-failure demonstration.", "recovery_action": "Stopped safely without reporting a payment link."}}
+{"timestamp": "2026-08-26T15:31:39.482518+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:31:39.483555+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:31:39.485564+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:31:39.486558+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-ui-growth-upsell-9f6dc3cc", "mode": "test"}}
+{"timestamp": "2026-08-26T15:31:40.570689+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "payment_link_id": "plink_TURsdM0hepLzpL", "reference_id": "demo-merchant-ui-growth-upsell-9f6dc3cc", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:31:40.571644+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "payment_link_id": "plink_TURsdM0hepLzpL", "amount": 55000}}
+{"timestamp": "2026-08-26T15:31:44.162087+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:31:44.162087+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:31:44.163087+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-failure", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:31:44.163087+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant-failure", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-failure-growth-upsell-5927f060", "mode": "test"}}
+{"timestamp": "2026-08-26T15:31:44.163087+00:00", "event": "PAYMENT_LINK_CREATION_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant-failure", "reason": "Controlled Razorpay Test Mode API failure for graceful-failure demonstration.", "mode": "test", "reference_id": "demo-merchant-failure-growth-upsell-5927f060"}}
+{"timestamp": "2026-08-26T15:31:44.163087+00:00", "event": "GROWTH_WORKFLOW_FAILED", "status": "FAIL", "details": {"merchant_id": "demo-merchant-failure", "stage": "payment_link_creation", "reason": "Controlled Razorpay Test Mode API failure for graceful-failure demonstration.", "recovery_action": "Stopped safely without reporting a payment link."}}
+{"timestamp": "2026-08-26T15:33:46.227950+00:00", "event": "GROWTH_OPPORTUNITY_IDENTIFIED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "opportunity": "bounded_upsell"}}
+{"timestamp": "2026-08-26T15:33:46.229977+00:00", "event": "UPSELL_PROPOSED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "base_product": "Premium Annual Plan", "upsell_product": "Premium Support", "base_amount": 50000, "upsell_amount": 5000, "final_amount": 55000}}
+{"timestamp": "2026-08-26T15:33:46.230989+00:00", "event": "UPSELL_POLICY_VALIDATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "upsell_percentage": 10.0}}
+{"timestamp": "2026-08-26T15:33:46.231989+00:00", "event": "PAYMENT_LINK_REQUESTED", "status": "INFO", "details": {"merchant_id": "demo-merchant-ui", "amount": 55000, "currency": "INR", "reference_id": "demo-merchant-ui-growth-upsell-42dc5ca9", "mode": "test"}}
+{"timestamp": "2026-08-26T15:33:47.100587+00:00", "event": "PAYMENT_LINK_CREATED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "payment_link_id": "plink_TURurXIqm2gOpH", "reference_id": "demo-merchant-ui-growth-upsell-42dc5ca9", "amount": 55000, "mode": "test"}}
+{"timestamp": "2026-08-26T15:33:47.102053+00:00", "event": "GROWTH_WORKFLOW_COMPLETED", "status": "PASS", "details": {"merchant_id": "demo-merchant-ui", "payment_link_id": "plink_TURurXIqm2gOpH", "amount": 55000}}

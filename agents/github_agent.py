@@ -2,7 +2,6 @@ from agents.repair_loop import repair_loop
 from agents.audit import audit_logger
 
 from github.issues import get_issue
-
 from github.git_operations import git_operations
 
 from github.pull_requests import (
@@ -19,8 +18,8 @@ from agents.repository import (
 from agents.planner import plan_issue
 from agents.code_generator import generate_fix
 
-from razorpay.policy import validate_payment_plan
-from razorpay.validator import validate_changes
+from rzp_gate.policy import validate_payment_plan
+from rzp_gate.validator import validate_changes
 
 from guardrail.security_validator import SecurityValidator
 
@@ -66,8 +65,8 @@ def solve_issue(repo, issue_number):
                               ↓
                               PR
 
-    The agent stops safely whenever validation,
-    testing, repair, Git, or PR creation fails.
+    The workflow stops safely whenever a validation,
+    testing, repair, Git, or PR operation fails.
     """
 
     # ==================================================
@@ -84,6 +83,7 @@ def solve_issue(repo, issue_number):
     )
 
     try:
+
         issue = get_issue(
             repo,
             issue_number,
@@ -91,9 +91,11 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
-        print(
-            f"\nFailed to fetch GitHub issue: {error}"
+        reason = (
+            f"Failed to fetch GitHub issue: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "ISSUE_FETCH_FAILED",
@@ -101,7 +103,7 @@ def solve_issue(repo, issue_number):
             details={
                 "repo": repo,
                 "issue_number": issue_number,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -135,20 +137,23 @@ def solve_issue(repo, issue_number):
     )
 
     try:
+
         structure = get_repo_structure()
 
     except Exception as error:
 
-        print(
-            f"\nRepository analysis failed: {error}"
+        reason = (
+            f"Repository analysis failed: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "REPOSITORY_ANALYSIS_FAILED",
             status="FAIL",
             details={
                 "thread_id": thread_id,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -171,6 +176,7 @@ def solve_issue(repo, issue_number):
     )
 
     try:
+
         plan = plan_issue(
             issue,
             structure,
@@ -178,16 +184,18 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
-        print(
-            f"\nPlanning failed: {error}"
+        reason = (
+            f"Planning failed: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "PLAN_CREATION_FAILED",
             status="FAIL",
             details={
                 "thread_id": thread_id,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -212,6 +220,12 @@ def solve_issue(repo, issue_number):
                 "requires_razorpay",
                 False,
             ),
+            "payment_operation": plan.get(
+                "payment_operation"
+            ),
+            "risk_level": plan.get(
+                "risk_level"
+            ),
         },
     )
 
@@ -223,7 +237,15 @@ def solve_issue(repo, issue_number):
         plan
     )
 
-    if not payment_policy["allowed"]:
+    if not payment_policy.get(
+        "allowed",
+        False,
+    ):
+
+        reason = payment_policy.get(
+            "reason",
+            "Razorpay payment policy rejected the operation.",
+        )
 
         print(
             "\nRazorpay payment policy rejected "
@@ -231,48 +253,12 @@ def solve_issue(repo, issue_number):
         )
 
         print(
-            f"Reason: "
-            f"{payment_policy['reason']}"
+            f"Reason: {reason}"
         )
 
         audit_logger.log(
             "PAYMENT_POLICY_REJECTED",
             status="FAIL",
-            details={
-                "thread_id": thread_id,
-                "reason": payment_policy["reason"],
-            },
-        )
-
-        return
-
-    if plan.get(
-        "requires_razorpay",
-        False,
-    ):
-
-        print(
-            "\n   Razorpay payment operation detected."
-        )
-
-        print(
-            f"   Operation: "
-            f"{plan.get('payment_operation')}"
-        )
-
-        print(
-            f"   Risk level: "
-            f"{plan.get('risk_level')}"
-        )
-
-        print(
-            f"   Human approval required: "
-            f"{payment_policy['requires_approval']}"
-        )
-
-        audit_logger.log(
-            "PAYMENT_RISK_CLASSIFIED",
-            status="INFO",
             details={
                 "thread_id": thread_id,
                 "operation": plan.get(
@@ -281,11 +267,57 @@ def solve_issue(repo, issue_number):
                 "risk_level": plan.get(
                     "risk_level"
                 ),
-                "requires_approval": (
-                    payment_policy[
-                        "requires_approval"
-                    ]
-                ),
+                "reason": reason,
+            },
+        )
+
+        return
+
+    requires_approval = payment_policy.get(
+        "requires_approval",
+        False,
+    )
+
+    if plan.get(
+        "requires_razorpay",
+        False,
+    ):
+
+        operation = plan.get(
+            "payment_operation",
+            "unknown",
+        )
+
+        risk_level = plan.get(
+            "risk_level",
+            "unknown",
+        )
+
+        print(
+            "\n   Razorpay payment operation detected."
+        )
+
+        print(
+            f"   Operation: {operation}"
+        )
+
+        print(
+            f"   Risk level: {risk_level}"
+        )
+
+        print(
+            f"   Human approval required: "
+            f"{requires_approval}"
+        )
+
+        audit_logger.log(
+            "PAYMENT_RISK_CLASSIFIED",
+            status="INFO",
+            details={
+                "thread_id": thread_id,
+                "operation": operation,
+                "risk_level": risk_level,
+                "requires_approval": requires_approval,
             },
         )
 
@@ -315,16 +347,18 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
-        print(
-            f"\nFailed to read repository files: {error}"
+        reason = (
+            f"Failed to read repository files: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "FILES_READ_FAILED",
             status="FAIL",
             details={
                 "thread_id": thread_id,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -358,16 +392,18 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
-        print(
-            f"\nCode generation failed: {error}"
+        reason = (
+            f"Code generation failed: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "CODE_GENERATION_FAILED",
             status="FAIL",
             details={
                 "thread_id": thread_id,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -380,8 +416,12 @@ def solve_issue(repo, issue_number):
 
     if not changes:
 
+        reason = (
+            "Code generator produced no changes."
+        )
+
         print(
-            "\nCode generator produced no changes."
+            f"\n{reason}"
         )
 
         audit_logger.log(
@@ -389,6 +429,7 @@ def solve_issue(repo, issue_number):
             status="FAIL",
             details={
                 "thread_id": thread_id,
+                "reason": reason,
             },
         )
 
@@ -431,8 +472,10 @@ def solve_issue(repo, issue_number):
 
     except RuntimeError as error:
 
+        reason = str(error)
+
         print(
-            f"\nAborting: {error}"
+            f"\nAborting: {reason}"
         )
 
         audit_logger.log(
@@ -443,7 +486,7 @@ def solve_issue(repo, issue_number):
                     change["path"]
                     for change in changes
                 ],
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -463,13 +506,20 @@ def solve_issue(repo, issue_number):
 
     if not security_result["valid"]:
 
+        violations = security_result.get(
+            "violations",
+            [],
+        )
+
+        reason = (
+            "Security validation failed."
+        )
+
         print(
             "\nSECURITY VALIDATION FAILED"
         )
 
-        for violation in (
-            security_result["violations"]
-        ):
+        for violation in violations:
 
             print(
                 f"   - {violation}"
@@ -483,11 +533,8 @@ def solve_issue(repo, issue_number):
                     change["path"]
                     for change in changes
                 ],
-                "violations": (
-                    security_result[
-                        "violations"
-                    ]
-                ),
+                "violations": violations,
+                "reason": reason,
             },
         )
 
@@ -507,13 +554,20 @@ def solve_issue(repo, issue_number):
 
     if not razorpay_validation["valid"]:
 
-        print(
-            "\nRazorpay security validation failed."
+        errors = razorpay_validation.get(
+            "errors",
+            [],
         )
 
-        for error in (
-            razorpay_validation["errors"]
-        ):
+        reason = (
+            "Razorpay security validation failed."
+        )
+
+        print(
+            f"\n{reason}"
+        )
+
+        for error in errors:
 
             print(
                 f"   - {error}"
@@ -527,11 +581,8 @@ def solve_issue(repo, issue_number):
                     change["path"]
                     for change in changes
                 ],
-                "errors": (
-                    razorpay_validation[
-                        "errors"
-                    ]
-                ),
+                "errors": errors,
+                "reason": reason,
             },
         )
 
@@ -564,7 +615,7 @@ def solve_issue(repo, issue_number):
     # 8. Human approval
     # ==================================================
 
-    if payment_policy["requires_approval"]:
+    if requires_approval:
 
         print(
             "\n"
@@ -631,8 +682,12 @@ def solve_issue(repo, issue_number):
             "yes",
         }:
 
+            reason = (
+                "Human approval denied."
+            )
+
             print(
-                "\nApproval denied."
+                f"\n{reason}"
             )
 
             print(
@@ -648,6 +703,7 @@ def solve_issue(repo, issue_number):
                         change["path"]
                         for change in changes
                     ],
+                    "reason": reason,
                 },
             )
 
@@ -692,9 +748,11 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
-        print(
-            f"\nFailed to apply changes: {error}"
+        reason = (
+            f"Failed to apply changes: {error}"
         )
+
+        print(f"\n{reason}")
 
         audit_logger.log(
             "CHANGES_APPLICATION_FAILED",
@@ -704,7 +762,7 @@ def solve_issue(repo, issue_number):
                     change["path"]
                     for change in changes
                 ],
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -729,26 +787,33 @@ def solve_issue(repo, issue_number):
         "\n8. Running test suite..."
     )
 
+    test_command = "uv run pytest tests/"
+
     audit_logger.log(
         "TEST_STARTED",
         status="INFO",
         details={
             "thread_id": thread_id,
-            "test_command": "uv run pytest tests/",
+            "test_command": test_command,
         },
     )
 
     repair_result = repair_loop(
         issue=issue,
         changed_files=changes,
-        test_command="uv run pytest tests/",
+        test_command=test_command,
     )
 
     # ==================================================
-    # 11. Handle test/repair result
+    # 11. Handle test / repair result
     # ==================================================
 
     if not repair_result["success"]:
+
+        reason = (
+            "Autonomous repair failed after "
+            f"{repair_result['attempts']} attempt(s)."
+        )
 
         print(
             "\n   Autonomous repair failed."
@@ -766,6 +831,18 @@ def solve_issue(repo, issue_number):
         audit_logger.log(
             "TEST_FAILED",
             status="FAIL",
+            details={
+                "files": changed_paths,
+                "attempts": repair_result[
+                    "attempts"
+                ],
+                "reason": reason,
+            },
+        )
+
+        audit_logger.log(
+            "ROLLBACK_STARTED",
+            status="INFO",
             details={
                 "files": changed_paths,
                 "attempts": repair_result[
@@ -800,8 +877,12 @@ def solve_issue(repo, issue_number):
 
         except Exception as error:
 
+            rollback_reason = (
+                f"Rollback failed: {error}"
+            )
+
             print(
-                f"   Rollback failed: {error}"
+                f"   {rollback_reason}"
             )
 
             audit_logger.log(
@@ -809,7 +890,7 @@ def solve_issue(repo, issue_number):
                 status="FAIL",
                 details={
                     "files": changed_paths,
-                    "reason": str(error),
+                    "reason": rollback_reason,
                 },
             )
 
@@ -821,19 +902,18 @@ def solve_issue(repo, issue_number):
                 "attempts": repair_result[
                     "attempts"
                 ],
+                "reason": reason,
             },
         )
 
         print(
-            "\n   Aborting before Git operations."
+            "\n   Aborting before Git delivery operations."
         )
 
-        # IMPORTANT:
-        # Return ONLY when repair actually failed.
         return
 
     # ==================================================
-    # Repair/test succeeded
+    # Repair / test succeeded
     # ==================================================
 
     audit_logger.log(
@@ -863,7 +943,7 @@ def solve_issue(repo, issue_number):
     # IMPORTANT:
     #
     # The repair loop may have modified the files.
-    # Therefore, use the final repaired changes.
+    # Therefore use the final repaired changes.
 
     changes = repair_result[
         "final_changes"
@@ -895,6 +975,11 @@ def solve_issue(repo, issue_number):
 
     if sensitive_files:
 
+        reason = (
+            "Sensitive files detected. "
+            "Git delivery blocked."
+        )
+
         print(
             "\nSensitive files detected."
         )
@@ -908,6 +993,7 @@ def solve_issue(repo, issue_number):
             status="FAIL",
             details={
                 "files": sensitive_files,
+                "reason": reason,
             },
         )
 
@@ -950,9 +1036,12 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
+        reason = (
+            f"Git branch creation failed: {error}"
+        )
+
         print(
-            f"\nGit branch creation failed: "
-            f"{error}"
+            f"\n{reason}"
         )
 
         audit_logger.log(
@@ -960,7 +1049,7 @@ def solve_issue(repo, issue_number):
             status="FAIL",
             details={
                 "branch": branch_name,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -1011,8 +1100,12 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
+        reason = (
+            f"Git commit failed: {error}"
+        )
+
         print(
-            f"\nGit commit failed: {error}"
+            f"\n{reason}"
         )
 
         audit_logger.log(
@@ -1020,7 +1113,7 @@ def solve_issue(repo, issue_number):
             status="FAIL",
             details={
                 "files": changed_paths,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -1064,8 +1157,12 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
+        reason = (
+            f"Git push failed: {error}"
+        )
+
         print(
-            f"\nGit push failed: {error}"
+            f"\n{reason}"
         )
 
         audit_logger.log(
@@ -1073,7 +1170,7 @@ def solve_issue(repo, issue_number):
             status="FAIL",
             details={
                 "branch": branch_name,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
@@ -1123,9 +1220,12 @@ def solve_issue(repo, issue_number):
 
     except Exception as error:
 
+        reason = (
+            f"Pull Request creation failed: {error}"
+        )
+
         print(
-            f"\nPull Request creation failed: "
-            f"{error}"
+            f"\n{reason}"
         )
 
         audit_logger.log(
@@ -1134,14 +1234,14 @@ def solve_issue(repo, issue_number):
             details={
                 "repo": repo,
                 "branch": branch_name,
-                "reason": str(error),
+                "reason": reason,
             },
         )
 
         return
 
     # ==================================================
-    # DONE
+    # 17. Workflow completed
     # ==================================================
 
     audit_logger.log(

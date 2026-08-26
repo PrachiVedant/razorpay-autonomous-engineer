@@ -1,4 +1,4 @@
-from razorpay.validator import validate_changes
+from rzp_gate.validator import validate_changes
 
 
 safe_changes = [

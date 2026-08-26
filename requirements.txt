@@ -6,4 +6,5 @@ python-dotenv
 langchain-openai
 pydantic
 langchain-groq
-langchain-google-genai
+langchain-google-genairazorpay>=1.4.0
+razorpay>=1.4.0

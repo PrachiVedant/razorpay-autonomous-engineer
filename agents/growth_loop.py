@@ -1,0 +1,227 @@
+from audit.logger import log_event
+from agents.growth_agent import identify_growth_opportunity
+from agents.opportunity_validator import validate_opportunity
+from rzp_gate.policy import validate_payment_plan
+from rzp_gate.actions import RazorpayActions
+from razorpay.errors import BadRequestError, ServerError, GatewayError
+from merchant.data import get_orders
+
+
+def run_growth_cycle():
+    """
+    End-to-end growth cycle:
+
+        Opportunity (LLM)
+          ↓
+        Validation (deterministic, against ground-truth data)
+          ↓
+        Policy gate (allowed? needs human approval?)
+          ↓
+        Execution (real Razorpay test-mode API call)
+          ↓
+        Audit log at every step
+    """
+
+    log_event(
+        "GROWTH_CYCLE_STARTED",
+        agent="growth_loop",
+    )
+
+    # --------------------------------------------------
+    # 1. LLM identifies an opportunity from real data
+    # --------------------------------------------------
+
+    opportunity = identify_growth_opportunity()
+
+    log_event(
+        "OPPORTUNITY_IDENTIFIED",
+        agent="growth_agent",
+        data=opportunity,
+    )
+
+    # --------------------------------------------------
+    # 2. Deterministic check: does the LLM's evidence
+    #    actually match ground-truth merchant data?
+    # --------------------------------------------------
+
+    validation = validate_opportunity(opportunity)
+
+    log_event(
+        "OPPORTUNITY_VALIDATED",
+        agent="opportunity_validator",
+        data=validation,
+    )
+
+    if not validation["valid"]:
+
+        log_event(
+            "GROWTH_CYCLE_REJECTED",
+            agent="growth_loop",
+            data={"reason": validation["reason"]},
+        )
+
+        return {
+            "status": "rejected",
+            "reason": validation["reason"],
+        }
+
+    # --------------------------------------------------
+    # 3. Policy gate: is this money action allowed?
+    #    Does it require a human in the loop?
+    # --------------------------------------------------
+
+    plan = {
+        "requires_razorpay": True,
+        "payment_operation": "payment_link",
+        "risk_level": "medium",
+    }
+
+    policy = validate_payment_plan(plan)
+
+    log_event(
+        "POLICY_DECISION",
+        agent="policy",
+        data=policy,
+    )
+
+    if not policy["allowed"]:
+
+        log_event(
+            "GROWTH_CYCLE_BLOCKED",
+            agent="growth_loop",
+            data=policy,
+        )
+
+        return {
+            "status": "blocked",
+            "reason": policy["reason"],
+        }
+
+    if policy["requires_approval"]:
+
+        log_event(
+            "HUMAN_APPROVAL_REQUIRED",
+            agent="growth_loop",
+            data=policy,
+        )
+
+        return {
+            "status": "awaiting_approval",
+            "plan": plan,
+            "opportunity": opportunity,
+        }
+
+    # --------------------------------------------------
+    # 4. Execute the real money action
+    # --------------------------------------------------
+
+    orders = [
+        order
+        for order in get_orders()
+        if order["status"] in ("abandoned", "failed")
+    ]
+
+    if not orders:
+
+        log_event(
+            "NO_TARGET_ORDERS",
+            agent="growth_loop",
+        )
+
+        return {
+            "status": "no_action",
+            "reason": "No recoverable orders found",
+        }
+
+    target_order = orders[0]
+    actions = RazorpayActions()
+
+    try:
+        link = actions.create_recovery_payment_link(
+            target_order
+        )
+
+        log_event(
+            "PAYMENT_LINK_CREATED",
+            agent="razorpay_actions",
+            data={
+                "order_id": target_order["order_id"],
+                "link_id": link.get("id"),
+                "short_url": link.get("short_url"),
+            },
+        )
+
+        return {
+            "status": "completed",
+            "payment_link": link,
+        }
+
+    except BadRequestError as error:
+        # Malformed / invalid request. Not retried —
+        # escalate to a human instead of retrying blindly.
+
+        log_event(
+            "PAYMENT_LINK_FAILED",
+            agent="razorpay_actions",
+            data={
+                "order_id": target_order["order_id"],
+                "error": str(error),
+                "action_taken": "escalated_to_human",
+            },
+        )
+
+        return {
+            "status": "failed",
+            "reason": str(error),
+            "escalated": True,
+        }
+
+    except (ServerError, GatewayError) as error:
+        # Transient, Razorpay/gateway-side error. Safe to
+        # retry once before giving up.
+
+        log_event(
+            "PAYMENT_LINK_RETRY",
+            agent="razorpay_actions",
+            data={
+                "order_id": target_order["order_id"],
+                "error": str(error),
+            },
+        )
+
+        try:
+            link = actions.create_recovery_payment_link(
+                target_order
+            )
+
+            log_event(
+                "PAYMENT_LINK_CREATED_ON_RETRY",
+                agent="razorpay_actions",
+                data={
+                    "order_id": target_order["order_id"],
+                    "link_id": link.get("id"),
+                },
+            )
+
+            return {
+                "status": "completed",
+                "payment_link": link,
+                "attempts": 2,
+            }
+
+        except Exception as retry_error:
+
+            log_event(
+                "PAYMENT_LINK_FAILED_FINAL",
+                agent="razorpay_actions",
+                data={
+                    "order_id": target_order["order_id"],
+                    "error": str(retry_error),
+                },
+            )
+
+            return {
+                "status": "failed",
+                "reason": str(retry_error),
+                "attempts": 2,
+            }

@@ -2,7 +2,7 @@ import json
 import re
 
 from agents.llm import OpenAIProvider
-from razorpay.tools import RazorpayTools
+from rzp_gate.tools import RazorpayTools
 
 
 def plan_issue(issue, structure):
