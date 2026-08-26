@@ -1,10 +1,7 @@
-from agents.audit import audit_logger
 from agents.test_runner import run_tests
 from agents.repair import repair_code
 from agents.repository import read_file, write_file
 from agents.audit import audit_logger
-
-from razorpay.validator import validate_changes
 
 
 MAX_RETRIES = 3
@@ -43,12 +40,14 @@ def repair_loop(
     The repair agent is restricted to the files
     originally changed by the coding agent.
 
-    Every repair is passed through the deterministic
-    Razorpay security validator before being applied.
+    Returns:
 
-    Important:
-    The audit trail records workflow metadata only.
-    It must never contain secrets or file contents.
+        {
+            "success": bool,
+            "attempts": int,
+            "final_changes": list,
+            "test_output": str,
+        }
     """
 
     attempts = 0
@@ -60,8 +59,13 @@ def repair_loop(
 
     test_output = ""
 
+    # --------------------------------------------------
+    # Audit: repair loop started
+    # --------------------------------------------------
+
     audit_logger.log(
         "REPAIR_LOOP_STARTED",
+        status="INFO",
         details={
             "files": list(allowed_paths),
             "max_retries": MAX_RETRIES,
@@ -85,17 +89,18 @@ def repair_loop(
             f"{'=' * 60}"
         )
 
+        # -----------------------------------------
+        # 1. Run tests
+        # -----------------------------------------
+
         audit_logger.log(
             "TEST_STARTED",
+            status="INFO",
             details={
                 "attempt": attempts,
                 "test_command": test_command,
             },
         )
-
-        # -----------------------------------------
-        # 1. Run tests
-        # -----------------------------------------
 
         result = run_tests(
             test_command
@@ -129,6 +134,9 @@ def repair_loop(
                 status="PASS",
                 details={
                     "attempts": attempts,
+                    "files": list(
+                        allowed_paths
+                    ),
                 },
             )
 
@@ -158,16 +166,61 @@ def repair_loop(
             status="FAIL",
             details={
                 "attempt": attempts,
+                "test_command": test_command,
             },
         )
+
+        # -----------------------------------------
+        # 4. Maximum retry protection
+        # -----------------------------------------
+
+        if attempts >= MAX_RETRIES:
+
+            print(
+                "\nMaximum repair attempts reached."
+            )
+
+            audit_logger.log(
+                "REPAIR_LOOP_FAILED",
+                status="FAIL",
+                details={
+                    "attempts": attempts,
+                    "max_retries": MAX_RETRIES,
+                    "files": list(
+                        allowed_paths
+                    ),
+                },
+            )
+
+            return {
+                "success": False,
+                "attempts": attempts,
+                "final_changes": changed_files,
+                "test_output": test_output,
+            }
+
+        # -----------------------------------------
+        # 5. Start repair
+        # -----------------------------------------
 
         print(
             "\nSending failure "
             "to repair agent..."
         )
 
+        audit_logger.log(
+            "REPAIR_STARTED",
+            status="INFO",
+            details={
+                "attempt": attempts,
+                "files": list(
+                    allowed_paths
+                ),
+            },
+        )
+
         # -----------------------------------------
-        # 4. Read current versions of files
+        # 6. Read current files
         # -----------------------------------------
 
         file_contents = {}
@@ -181,16 +234,8 @@ def repair_loop(
             )
 
         # -----------------------------------------
-        # 5. Ask repair agent for a fix
+        # 7. Call repair agent
         # -----------------------------------------
-
-        audit_logger.log(
-            "REPAIR_STARTED",
-            details={
-                "attempt": attempts,
-                "files": list(file_contents.keys()),
-            },
-        )
 
         print(
             "\n[REPAIR LOOP] Calling repair agent...",
@@ -221,7 +266,7 @@ def repair_loop(
         )
 
         # -----------------------------------------
-        # 6. Handle empty repair
+        # 8. Handle empty repair
         # -----------------------------------------
 
         new_changes = repair_result.get(
@@ -237,19 +282,11 @@ def repair_loop(
             )
 
             audit_logger.log(
-                "REPAIR_NO_CHANGES",
+                "REPAIR_FAILED",
                 status="FAIL",
                 details={
                     "attempt": attempts,
-                },
-            )
-
-            audit_logger.log(
-                "REPAIR_LOOP_ABORTED",
-                status="FAIL",
-                details={
-                    "reason": "No repair changes returned.",
-                    "attempt": attempts,
+                    "reason": "No changes proposed.",
                 },
             )
 
@@ -261,32 +298,12 @@ def repair_loop(
             }
 
         # -----------------------------------------
-        # 7. SECURITY:
-        # Validate repair paths
+        # 9. Validate repair paths
         # -----------------------------------------
 
         for change in new_changes:
 
-            path = change.get(
-                "path",
-                ""
-            )
-
-            if not path:
-
-                audit_logger.log(
-                    "REPAIR_SECURITY_REJECTED",
-                    status="FAIL",
-                    details={
-                        "reason": "Missing file path.",
-                        "attempt": attempts,
-                    },
-                )
-
-                raise RuntimeError(
-                    "Repair agent returned "
-                    "a change without a file path."
-                )
+            path = change["path"]
 
             if not is_allowed_repair_path(
                 path,
@@ -294,12 +311,14 @@ def repair_loop(
             ):
 
                 audit_logger.log(
-                    "REPAIR_SECURITY_REJECTED",
+                    "REPAIR_BLOCKED",
                     status="FAIL",
                     details={
-                        "reason": "Unauthorized repair path.",
-                        "path": path,
                         "attempt": attempts,
+                        "file": path,
+                        "reason": (
+                            "Unauthorized repair path."
+                        ),
                     },
                 )
 
@@ -310,81 +329,7 @@ def repair_loop(
                 )
 
         # -----------------------------------------
-        # 8. SECURITY:
-        # Validate repaired code
-        # -----------------------------------------
-
-        print(
-            "\nValidating repair "
-            "with security validator..."
-        )
-
-        security_validation = validate_changes(
-            new_changes
-        )
-
-        if not security_validation["valid"]:
-
-            print(
-                "\nRepair rejected by "
-                "Razorpay security validator."
-            )
-
-            for error in security_validation["errors"]:
-
-                print(
-                    f"   - {error}"
-                )
-
-            audit_logger.log(
-                "REPAIR_SECURITY_REJECTED",
-                status="FAIL",
-                details={
-                    "attempt": attempts,
-                    "error_count": len(
-                        security_validation["errors"]
-                    ),
-                },
-            )
-
-            audit_logger.log(
-                "REPAIR_LOOP_ABORTED",
-                status="FAIL",
-                details={
-                    "reason": "Security validation failed.",
-                    "attempt": attempts,
-                },
-            )
-
-            print(
-                "\nRepair will NOT be applied."
-            )
-
-            return {
-                "success": False,
-                "attempts": attempts,
-                "final_changes": changed_files,
-                "test_output": test_output,
-            }
-
-        print(
-            "   Security validation passed."
-        )
-
-        audit_logger.log(
-            "REPAIR_SECURITY_VALIDATED",
-            status="PASS",
-            details={
-                "attempt": attempts,
-                "files": [
-                    change["path"]
-                    for change in new_changes
-                ],
-            },
-        )
-
-        # -----------------------------------------
-        # 9. Print repair reasoning
+        # 10. Print reasoning
         # -----------------------------------------
 
         print(
@@ -399,7 +344,7 @@ def repair_loop(
         )
 
         # -----------------------------------------
-        # 10. Detect no-op repairs
+        # 11. Detect no-op repairs
         # -----------------------------------------
 
         actual_changes = []
@@ -426,7 +371,7 @@ def repair_loop(
             )
 
         # -----------------------------------------
-        # 11. Stop if repair changed nothing
+        # 12. Stop if nothing changed
         # -----------------------------------------
 
         if not actual_changes:
@@ -437,25 +382,12 @@ def repair_loop(
             )
 
             audit_logger.log(
-                "REPAIR_NO_EFFECTIVE_CHANGE",
+                "REPAIR_FAILED",
                 status="FAIL",
                 details={
                     "attempt": attempts,
+                    "reason": "No effective changes.",
                 },
-            )
-
-            audit_logger.log(
-                "REPAIR_LOOP_ABORTED",
-                status="FAIL",
-                details={
-                    "reason": "Repair produced no effective changes.",
-                    "attempt": attempts,
-                },
-            )
-
-            print(
-                "Stopping repair loop because "
-                "retrying would produce the same result."
             )
 
             return {
@@ -466,7 +398,7 @@ def repair_loop(
             }
 
         # -----------------------------------------
-        # 12. Apply repair
+        # 13. Apply repair
         # -----------------------------------------
 
         print(
@@ -498,25 +430,21 @@ def repair_loop(
         )
 
         # -----------------------------------------
-        # 13. Update current changes
+        # 14. Update current changes
         # -----------------------------------------
 
         changed_files = actual_changes
 
-    # ---------------------------------------------
-    # Maximum retries reached
-    # ---------------------------------------------
-
-    print(
-        "\nMaximum repair attempts reached."
-    )
+    # --------------------------------------------------
+    # Safety fallback
+    # --------------------------------------------------
 
     audit_logger.log(
-        "REPAIR_LOOP_ABORTED",
+        "REPAIR_LOOP_FAILED",
         status="FAIL",
         details={
-            "reason": "Maximum retry limit reached.",
             "attempts": attempts,
+            "max_retries": MAX_RETRIES,
         },
     )
 

@@ -39,3 +39,198 @@
 {"timestamp": "2026-08-26T06:05:19.999698+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
 {"timestamp": "2026-08-26T06:05:19.999698+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
 {"timestamp": "2026-08-26T06:05:20.044900+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:17:36.039204+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:17:36.039204+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:17:36.040205+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:17:36.040205+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:17:36.041209+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:17:36.042524+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:17:36.042524+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:17:36.043529+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:17:36.043529+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:17:38.533552+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:17:38.963208+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:17:38.963208+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T06:17:38.963208+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:17:38.963208+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1}}
+{"timestamp": "2026-08-26T06:17:38.963208+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:17:38.964893+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:17:38.964893+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:17:41.463753+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:17:41.867337+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:17:41.868344+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:17:44.258356+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:17:44.634577+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:17:44.634577+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T06:17:44.658690+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:22:37.535695+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:22:37.536704+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:22:37.536704+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:22:37.551933+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:22:37.552440+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:22:37.554450+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:22:37.554450+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:22:37.554450+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:22:37.555446+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:22:40.074839+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:22:40.481415+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:22:40.481415+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:22:40.481415+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:22:40.481415+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1}}
+{"timestamp": "2026-08-26T06:22:40.482658+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:22:40.482658+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:22:40.483668+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:22:42.948889+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:22:43.366687+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:22:43.368686+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:22:45.797553+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:22:46.188815+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:22:46.190208+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:22:46.234491+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:26:54.252552+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:26:54.253058+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:26:54.253058+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:26:54.270202+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:26:54.271713+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:26:54.274017+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:26:54.274017+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:26:54.274017+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:26:54.275027+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:26:56.726919+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:26:57.099896+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:26:57.101404+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:26:57.101404+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:26:57.101404+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:26:57.101404+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:26:57.102413+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:26:57.102919+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:26:57.102919+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:26:59.473197+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:26:59.924922+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:26:59.924922+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:27:02.453313+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:27:02.940886+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:27:02.940886+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:27:02.987460+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:28:26.989057+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:28:26.990057+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:28:26.990057+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:28:26.990057+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:28:26.991564+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:28:26.993077+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:26.993077+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:26.993077+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:28:26.993077+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:28:29.663577+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:28:30.108670+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:28:30.109678+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:30.109678+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:30.109678+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:28:30.110754+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:30.110754+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:28:30.110754+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:28:30.110754+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:28:32.692148+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:28:33.186059+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:28:33.188012+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:28:35.716053+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:28:36.162857+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:28:36.162857+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:28:36.222125+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:29:41.652244+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:29:41.653376+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:29:41.653376+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:29:41.654389+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:29:41.654389+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:29:41.656387+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:41.656387+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:41.656387+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:29:41.656387+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:29:44.176388+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:29:44.570152+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:29:44.570152+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:44.570152+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:44.571515+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:29:44.571515+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:44.572392+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:29:44.573169+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:29:44.573169+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:29:46.950108+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:29:47.399155+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:29:47.400159+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:29:49.883665+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:29:50.327514+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:29:50.328515+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:29:50.374704+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:36:42.930417+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:36:42.930417+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:36:42.931420+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:36:42.948450+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:36:42.949373+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:36:42.951467+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:36:42.952442+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:36:42.952442+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:36:42.953374+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:36:45.419683+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:36:45.805587+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:36:45.806627+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:36:45.806627+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:36:45.806627+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:36:45.806627+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:36:45.806627+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:36:45.808207+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:36:48.180166+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:36:48.556896+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:36:48.556896+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:36:50.863531+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:36:51.270959+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:36:51.271960+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:36:51.297917+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:45:15.129013+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:45:15.129013+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:45:15.130085+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:45:15.145828+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:45:15.146829+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:45:15.147831+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:45:15.148828+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:45:15.148828+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:45:15.148828+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:45:17.598576+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:45:17.997948+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:45:17.998948+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:45:17.998948+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:45:17.998948+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:45:17.999948+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:45:17.999948+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:45:17.999948+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:45:20.742778+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:45:21.231775+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:45:21.232772+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:45:23.707825+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:45:24.161759+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:45:24.162765+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:45:24.202985+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:46:33.719281+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:46:33.720280+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:46:33.720280+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:46:33.737025+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T06:46:33.738026+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:46:33.740040+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:46:33.740040+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:46:33.741027+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:46:33.741027+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T06:46:36.316810+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:46:36.695147+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:46:36.696161+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:46:36.696161+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:46:36.696161+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:46:36.697161+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:46:36.697161+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:46:36.697161+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:46:39.147231+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:46:39.620786+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T06:46:39.620786+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T06:46:42.214457+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:46:42.626085+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T06:46:42.626085+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:46:42.650686+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
