@@ -605,7 +605,7 @@ def solve_issue(repo, issue_number):
             )
 
         audit_logger.log(
-            "HUMAN_APPROVAL_REQUESTED",
+            "HUMAN_APPROVAL_REQUIRED",
             status="INFO",
             details={
                 "operation": plan.get(
@@ -729,6 +729,15 @@ def solve_issue(repo, issue_number):
         "\n8. Running test suite..."
     )
 
+    audit_logger.log(
+        "TEST_STARTED",
+        status="INFO",
+        details={
+            "thread_id": thread_id,
+            "test_command": "uv run pytest tests/",
+        },
+    )
+
     repair_result = repair_loop(
         issue=issue,
         changed_files=changes,
@@ -750,21 +759,32 @@ def solve_issue(repo, issue_number):
         )
 
         changed_paths = [
-        change["path"]
-        for change in fix["changes"]
+            change["path"]
+            for change in changes
         ]
+
+        audit_logger.log(
+            "TEST_FAILED",
+            status="FAIL",
+            details={
+                "files": changed_paths,
+                "attempts": repair_result[
+                    "attempts"
+                ],
+            },
+        )
 
         try:
 
             git_operations.invoke(
-            {
-                "action": "rollback",
-                "files": changed_paths,
-            }
+                {
+                    "action": "rollback",
+                    "files": changed_paths,
+                }
             )
 
             print(
-            "   Rollback completed."
+                "   Rollback completed."
             )
 
             audit_logger.log(
@@ -775,13 +795,13 @@ def solve_issue(repo, issue_number):
                     "attempts": repair_result[
                         "attempts"
                     ],
-             },
+                },
             )
 
         except Exception as error:
 
             print(
-            f"   Rollback failed: {error}"
+                f"   Rollback failed: {error}"
             )
 
             audit_logger.log(
@@ -808,7 +828,37 @@ def solve_issue(repo, issue_number):
             "\n   Aborting before Git operations."
         )
 
+        # IMPORTANT:
+        # Return ONLY when repair actually failed.
         return
+
+    # ==================================================
+    # Repair/test succeeded
+    # ==================================================
+
+    audit_logger.log(
+        "TEST_PASSED",
+        status="PASS",
+        details={
+            "files": [
+                change["path"]
+                for change in changes
+            ],
+            "attempts": repair_result[
+                "attempts"
+            ],
+        },
+    )
+
+    audit_logger.log(
+        "REPAIR_LOOP_COMPLETED",
+        status="PASS",
+        details={
+            "attempts": repair_result[
+                "attempts"
+            ],
+        },
+    )
 
     # IMPORTANT:
     #

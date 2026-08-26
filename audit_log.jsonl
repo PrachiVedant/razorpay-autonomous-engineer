@@ -234,3 +234,522 @@
 {"timestamp": "2026-08-26T06:46:42.626085+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
 {"timestamp": "2026-08-26T06:46:42.626085+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
 {"timestamp": "2026-08-26T06:46:42.650686+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T06:52:39.417010+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T06:52:39.418017+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:52:39.418017+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T06:52:39.418017+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:52:39.419023+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T06:52:39.420021+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:52:39.420021+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:52:39.420021+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:52:39.437140+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T06:52:39.437140+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:52:39.438139+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T06:52:39.438139+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:26.390552+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:01:26.390552+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:26.390552+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:01:26.391554+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:26.391554+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:01:26.393590+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:26.393590+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:26.393590+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:26.394595+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:26.394595+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:26.395654+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:26.395654+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:40.785886+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:01:40.786740+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:40.786740+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:01:40.803572+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T07:01:40.805111+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:01:40.808114+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:40.809114+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:40.810114+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:01:40.810114+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:01:43.589831+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:01:43.601777+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:01:43.601777+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:43.601777+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:01:43.602777+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:43.602777+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:01:43.603826+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:43.604421+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:43.604421+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:43.604421+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:43.605537+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:43.605537+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:43.605537+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:44.023748+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:01:44.023748+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:44.023748+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:44.024757+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:44.024757+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:44.025587+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:44.025587+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:46.882365+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:01:46.896455+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:01:46.896455+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:46.897442+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:01:46.897442+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:46.897442+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:01:46.899442+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:46.899442+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:46.899442+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:46.899442+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:01:46.900442+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:46.900442+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:01:46.900442+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:03.831093+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:08:03.832465+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:03.832465+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py", "tests/test_sample.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:08:03.849382+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py", "tests/test_sample.py"]}}
+{"timestamp": "2026-08-26T07:08:03.850664+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:08:03.853673+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:03.855490+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:03.855490+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:08:03.856498+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:08:06.585865+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:08:06.604698+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:08:06.604698+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:06.604698+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:08:06.605705+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:06.605705+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:08:06.607453+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:06.607453+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:06.607453+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:06.607453+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:06.608444+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:06.608444+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:06.608444+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:07.112834+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:08:07.113840+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:07.114357+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:07.114357+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:07.115367+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:07.115991+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:07.115991+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:09.876209+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:08:09.889775+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:08:09.889775+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:09.889775+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:08:09.890783+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:09.890783+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:08:09.891785+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:09.892783+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:09.892783+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:09.892783+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:08:09.892783+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:09.893784+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:08:09.893784+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:47.302865+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:09:47.336473+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:09:47.336473+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:47.337474+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:09:47.337474+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:47.338481+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:09:47.339472+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:47.339472+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:47.340472+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:47.340472+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:47.340472+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:47.341472+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:47.341472+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:48.104285+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:09:48.104791+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:09:50.914050+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:09:50.931926+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:09:50.931926+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:50.932925+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:09:50.932925+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:50.932925+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:09:50.934430+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:50.934430+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:50.935437+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:50.935437+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:50.935437+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:50.935437+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:50.936444+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:51.367492+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:09:51.367492+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:51.404633+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:09:51.423827+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:09:51.424335+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:51.424335+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:09:51.424335+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:51.424335+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:09:51.426344+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:51.426344+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:51.426344+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:51.427340+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:09:51.427340+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:51.427340+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:09:51.427340+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:44.507049+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:16:44.542644+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:16:44.542644+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:44.542644+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:16:44.543646+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:44.543646+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:16:44.544658+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:44.545666+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:44.545666+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:44.545666+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:44.546672+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:44.546672+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:44.546672+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:45.379815+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:16:45.379815+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:16:48.360431+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:16:48.376552+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:16:48.376552+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.377551+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:16:48.377551+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.377551+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:16:48.379546+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.379546+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.379546+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.380547+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.380547+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.380547+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.380547+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.824820+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:16:48.824820+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.859581+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:16:48.898555+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:16:48.899556+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.899556+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:16:48.900557+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.901560+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:16:48.903554+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.903554+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.904806+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.905813+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:16:48.906507+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.906507+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:16:48.908529+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.045870+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:18:23.120156+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:18:23.120156+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.120156+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:18:23.121158+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:23.121158+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:18:23.122423+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:23.122423+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:23.122423+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.123929+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:23.124444+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.124444+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.125452+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:23.840345+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:18:23.841347+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:18:26.562654+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:18:26.624648+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:18:26.625655+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:26.625655+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:18:26.625655+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:26.626655+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:18:26.627657+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:26.627657+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:26.627657+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:26.628653+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:26.628653+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:26.628653+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:26.628653+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:27.041161+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:18:27.042161+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:27.060699+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:18:27.136848+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:18:27.136848+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:27.136848+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:18:27.138305+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:27.138305+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:18:27.139316+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:27.139316+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:27.140655+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:27.140655+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:18:27.140655+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:27.141313+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:18:27.141313+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:32.680910+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:19:32.754715+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:19:32.754715+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:32.754715+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:19:32.755863+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:32.755863+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:19:32.757873+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:32.757873+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:32.758870+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:32.758870+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:32.758870+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:32.758870+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:32.759872+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:33.522728+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:19:33.522728+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:19:36.156442+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:19:36.229429+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:19:36.230430+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.230430+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:19:36.230430+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.231429+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:19:36.232430+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.232430+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.232430+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.233938+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.233938+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.234460+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.234460+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.746248+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:19:36.747549+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.770499+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:19:36.861463+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:19:36.862456+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.862456+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:19:36.862456+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.862456+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:19:36.863964+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.864480+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.864480+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.864480+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:19:36.865487+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.865487+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:19:36.865487+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:13.107428+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:23:13.107428+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:13.107428+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:23:13.108423+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:13.108423+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:23:13.109539+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:13.110554+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:13.110554+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:23:13.110554+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:23:13.110554+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:23:13.111547+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:13.111547+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:13.111547+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:13.112547+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:13.112547+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:26.228548+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:23:26.319482+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:23:26.319482+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:26.320472+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:23:26.320472+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:26.320472+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:23:26.322547+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:26.322547+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:26.322547+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:23:26.322547+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:23:26.323470+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:23:26.323470+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:26.323982+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:26.323982+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:26.324499+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:26.324499+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:27.112971+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:23:27.112971+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:23:29.761281+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:23:29.827484+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:23:29.827484+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:29.827484+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:23:29.828485+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:29.828485+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:23:29.829485+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:29.829485+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:29.830484+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:23:29.830484+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:23:29.830484+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:23:29.830484+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:29.830484+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:29.831484+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:29.831484+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:29.831484+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:30.286652+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:23:30.286652+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:30.331348+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:23:30.417354+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:23:30.417354+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:30.418362+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:23:30.419718+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:30.419718+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:23:30.421043+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:30.421043+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:30.421043+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:23:30.422051+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:23:30.422051+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:23:30.422051+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:30.422051+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:23:30.423290+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:30.423290+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:23:30.423793+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:02.168299+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:32:02.244466+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:32:02.245476+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:02.245476+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:32:02.245476+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:02.245476+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:32:02.247475+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:02.247475+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:02.247475+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:32:02.247475+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:32:02.248475+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:32:02.248475+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:02.248475+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:02.248475+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:02.248475+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:02.249475+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:03.017929+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T07:32:03.017929+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T07:32:05.702392+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:32:05.777714+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:32:05.777714+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:05.779005+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:32:05.779005+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:05.779713+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:32:05.780714+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:05.780714+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:05.780714+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:32:05.780714+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:32:05.781937+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:32:05.781937+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:05.781937+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:05.781937+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:05.782715+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:05.782715+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:06.293964+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T07:32:06.294496+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:06.317604+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T07:32:06.426919+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T07:32:06.426919+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:06.427918+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T07:32:06.427918+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:06.427918+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T07:32:06.429918+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:06.429918+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:06.430925+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T07:32:06.430925+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T07:32:06.430925+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T07:32:06.431917+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:06.431917+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T07:32:06.431917+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:06.432917+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T07:32:06.432917+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:43.572344+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:01:43.871254+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:01:43.871254+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:43.871254+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:01:43.871254+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:43.872978+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:01:43.874255+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:43.874255+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:43.874255+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:01:43.874255+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:01:43.875256+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:01:43.875256+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:43.875256+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:43.875256+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:43.875256+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:43.876257+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:44.638564+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T08:01:44.639564+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T08:01:47.266489+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:01:47.602515+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:01:47.602515+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:47.603517+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:01:47.603517+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:47.603517+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:01:47.605518+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:47.605518+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:47.605518+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:01:47.606591+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:01:47.606591+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:01:47.606591+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:47.606591+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:47.606591+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:47.607647+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:47.607647+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:48.096043+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T08:01:48.096043+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:48.138531+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:01:48.453706+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:01:48.453706+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:48.453706+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:01:48.454707+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:48.454707+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:01:48.455700+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:48.455700+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:48.456701+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:01:48.456701+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:01:48.456701+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:01:48.456701+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:48.457704+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:01:48.457704+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:48.457704+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:01:48.457704+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:02:52.375187+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:02:52.664663+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:02:52.664663+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:02:52.664663+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:02:52.664663+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:02:52.665663+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:02:52.667118+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:02:52.667118+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:02:52.667663+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:02:52.667663+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:02:52.667663+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:02:52.667663+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:02:52.667663+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:02:52.668666+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:02:52.668666+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:02:52.668666+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:09.305234+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:04:09.638559+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:04:09.638559+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:09.639658+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:04:09.639658+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:09.639658+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:04:09.641669+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:09.641669+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:09.641669+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:04:09.642668+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:04:09.642668+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:04:09.642668+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:09.642668+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:09.643669+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:09.643669+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:09.643669+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:10.487881+00:00", "event": "REPAIR_LOOP_STARTED", "status": "INFO", "details": {"files": ["calculator.py"], "max_retries": 3}}
+{"timestamp": "2026-08-26T08:04:10.487881+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"attempt": 1, "test_command": "pytest tests/"}}
+{"timestamp": "2026-08-26T08:04:13.242808+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:04:13.543647+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:04:13.543647+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:13.544650+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:04:13.544650+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:13.545645+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:04:13.547643+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:13.547643+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:13.548645+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:04:13.548645+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:04:13.548645+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:04:13.549646+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:13.549646+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:13.549646+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:13.550645+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:13.550645+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:14.012131+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"attempt": 1}}
+{"timestamp": "2026-08-26T08:04:14.013138+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:14.039137+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "INFO", "details": {"files": ["app/routes/payments.py"]}}
+{"timestamp": "2026-08-26T08:04:14.404662+00:00", "event": "ISSUE_RECEIVED", "status": "INFO", "details": {"repo": "test/repository", "issue_number": 1, "thread_id": "test-repository-issue-1", "title": "Fix calculator addition"}}
+{"timestamp": "2026-08-26T08:04:14.404662+00:00", "event": "REPOSITORY_ANALYZED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:14.405659+00:00", "event": "PLAN_CREATED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "files_to_read": ["calculator.py"], "requires_razorpay": false}}
+{"timestamp": "2026-08-26T08:04:14.405659+00:00", "event": "FILES_READ", "status": "INFO", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:14.405659+00:00", "event": "CODE_GENERATED", "status": "INFO", "details": {"files": ["calculator.py"], "num_changes": 1}}
+{"timestamp": "2026-08-26T08:04:14.406656+00:00", "event": "SECURITY_VALIDATION_PASSED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:14.407661+00:00", "event": "CHANGES_APPLIED", "status": "PASS", "details": {"files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:14.407661+00:00", "event": "TEST_STARTED", "status": "INFO", "details": {"thread_id": "test-repository-issue-1", "test_command": "uv run pytest tests/"}}
+{"timestamp": "2026-08-26T08:04:14.407661+00:00", "event": "TEST_PASSED", "status": "PASS", "details": {"files": ["calculator.py"], "attempts": 1}}
+{"timestamp": "2026-08-26T08:04:14.407661+00:00", "event": "REPAIR_LOOP_COMPLETED", "status": "PASS", "details": {"attempts": 1}}
+{"timestamp": "2026-08-26T08:04:14.407661+00:00", "event": "GIT_BRANCH_CREATED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "GIT_COMMIT_CREATED", "status": "PASS", "details": {"num_files_changed": 1, "files": ["calculator.py"]}}
+{"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "GIT_PUSHED", "status": "PASS", "details": {"branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "PULL_REQUEST_CREATED", "status": "PASS", "details": {"repo": "test/repository", "branch": "test-repository-issue-1"}}
+{"timestamp": "2026-08-26T08:04:14.408662+00:00", "event": "WORKFLOW_COMPLETED", "status": "PASS", "details": {"repo": "test/repository", "issue_number": 1, "branch": "test-repository-issue-1"}}

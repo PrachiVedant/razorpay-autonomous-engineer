@@ -26,10 +26,12 @@ def fake_get_issue(repo, issue_number):
 def fake_repo_structure():
     print("\n[MOCK] Reading repository structure")
 
-    return """
-calculator.py
-tests/test_sample.py
-"""
+    return {
+        "files": [
+            "calculator.py",
+            "tests/test_sample.py",
+        ]
+    }
 
 
 # --------------------------------------------------
