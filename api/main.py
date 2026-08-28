@@ -48,6 +48,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -82,7 +83,6 @@ def sanitize_error(error: Exception) -> str:
     message = str(error)
 
     for pattern in SENSITIVE_PATTERNS:
-
         if re.search(
             pattern,
             message,
@@ -121,9 +121,7 @@ def sanitize_audit_event(event):
         for key, value in event.items():
 
             if key.lower() in sensitive_keys:
-
                 sanitized[key] = "[REDACTED]"
-
                 continue
 
             sanitized[key] = sanitize_audit_event(
@@ -133,7 +131,6 @@ def sanitize_audit_event(event):
         return sanitized
 
     if isinstance(event, list):
-
         return [
             sanitize_audit_event(item)
             for item in event
@@ -143,25 +140,209 @@ def sanitize_audit_event(event):
 
 
 # =========================================================
+# OPPORTUNITY NORMALIZATION
+# =========================================================
+
+def normalize_opportunity(opportunity):
+    """
+    Convert the internal growth-agent opportunity into
+    a stable frontend contract.
+
+    Internal growth agent fields:
+
+        base_product
+        upsell_product
+        base_amount
+        upsell_amount
+        final_amount
+        conversion_rate
+        historical_purchases
+        evidence
+        reason
+        reasoning
+
+    Frontend-friendly aliases are added without removing
+    the original fields.
+    """
+
+    if not isinstance(opportunity, dict):
+        return None
+
+    base_product = opportunity.get(
+        "base_product"
+    )
+
+    upsell_product = opportunity.get(
+        "upsell_product"
+    )
+
+    base_amount = opportunity.get(
+        "base_amount"
+    )
+
+    upsell_amount = opportunity.get(
+        "upsell_amount"
+    )
+
+    final_amount = opportunity.get(
+        "final_amount"
+    )
+
+    conversion_rate = opportunity.get(
+        "conversion_rate"
+    )
+
+    historical_purchases = opportunity.get(
+        "historical_purchases"
+    )
+
+    evidence = opportunity.get(
+        "evidence",
+        {},
+    )
+
+    reason = opportunity.get(
+        "reason"
+    )
+
+    reasoning = opportunity.get(
+        "reasoning",
+        [],
+    )
+
+    evidence_strength = opportunity.get(
+        "evidence_strength"
+    )
+
+    confidence = opportunity.get(
+        "confidence"
+    )
+
+    upsell_percentage = opportunity.get(
+        "upsell_percentage"
+    )
+
+    expected_incremental_revenue = opportunity.get(
+        "expected_incremental_revenue"
+    )
+
+    normalized = dict(opportunity)
+
+    # -----------------------------------------------------
+    # Stable names used by the frontend
+    # -----------------------------------------------------
+
+    normalized["base_product_name"] = (
+        base_product
+    )
+
+    normalized["upsell_product_name"] = (
+        upsell_product
+    )
+
+    # -----------------------------------------------------
+    # Evidence presentation
+    # -----------------------------------------------------
+
+    normalized["base_product_evidence"] = (
+        f"{historical_purchases:g} historical purchases"
+        if isinstance(
+            historical_purchases,
+            (int, float),
+        )
+        else None
+    )
+
+    normalized["upsell_evidence"] = (
+        f"{conversion_rate:.0%} historical conversion"
+        if isinstance(
+            conversion_rate,
+            (int, float),
+        )
+        else None
+    )
+
+    normalized["base_product_reason"] = (
+        f"{base_product} is the selected high-value "
+        "base product based on merchant data."
+        if base_product
+        else None
+    )
+
+    normalized["upsell_reason"] = (
+        reason
+        or (
+            f"{upsell_product} is supported by "
+            f"{conversion_rate:.0%} historical conversion "
+            "evidence."
+            if (
+                upsell_product
+                and isinstance(
+                    conversion_rate,
+                    (int, float),
+                )
+            )
+            else None
+        )
+    )
+
+    # -----------------------------------------------------
+    # Policy presentation
+    # -----------------------------------------------------
+
+    if (
+        isinstance(upsell_percentage, (int, float))
+        and upsell_percentage <= 0.10
+    ):
+        normalized["policy_reason"] = (
+            f"The upsell is "
+            f"{upsell_percentage:.0%} of the base amount, "
+            "which is within the 10% autonomous financial "
+            "boundary."
+        )
+    else:
+        normalized["policy_reason"] = (
+            "The deterministic policy engine controls "
+            "whether the financial action is permitted."
+        )
+
+    # -----------------------------------------------------
+    # Evidence summary
+    # -----------------------------------------------------
+
+    normalized["evidence_summary"] = (
+        evidence
+    )
+
+    normalized["reasoning"] = reasoning
+
+    normalized["evidence_strength"] = (
+        evidence_strength
+    )
+
+    normalized["confidence"] = confidence
+
+    normalized["expected_incremental_revenue"] = (
+        expected_incremental_revenue
+    )
+
+    return normalized
+
+
+# =========================================================
 # RESPONSE NORMALIZATION
 # =========================================================
 
-def normalize_growth_response(
-    result,
-):
+def normalize_growth_response(result):
     """
     Normalize the internal growth workflow result into
     a stable API response contract.
-
-    The React frontend can rely on these fields existing
-    regardless of whether the workflow succeeds or fails.
     """
 
     if not isinstance(
         result,
         dict,
     ):
-
         return {
             "success": False,
             "stage": "api",
@@ -172,6 +353,10 @@ def normalize_growth_response(
             "short_url": None,
             "opportunity": None,
         }
+
+    opportunity = normalize_opportunity(
+        result.get("opportunity")
+    )
 
     return {
         "success": result.get(
@@ -201,9 +386,7 @@ def normalize_growth_response(
             "short_url"
         ),
 
-        "opportunity": result.get(
-            "opportunity"
-        ),
+        "opportunity": opportunity,
     }
 
 
@@ -257,7 +440,6 @@ def read_audit_log(
                 )
 
             except json.JSONDecodeError:
-
                 continue
 
     return events[-limit:][::-1]
@@ -287,14 +469,6 @@ class GrowthRequest(BaseModel):
     Growth execution request.
 
     Only Test Mode is accepted.
-
-    Pydantic validation intentionally rejects values such as:
-
-        live
-        production
-        development
-
-    with HTTP 422.
     """
 
     mode: Literal["test"] = "test"
@@ -388,26 +562,17 @@ def simulate_failure():
     Run the SAME growth workflow while deliberately
     forcing the Payment Link execution boundary to fail.
 
-    This endpoint demonstrates graceful failure handling
-    and the corresponding audit trail.
+    This demonstrates graceful failure handling and
+    auditability.
     """
 
     import agents.growth_workflow as workflow
-
-    # -----------------------------------------------------
-    # Preserve the real implementation
-    # -----------------------------------------------------
 
     original = (
         workflow.create_payment_link
     )
 
-    # -----------------------------------------------------
-    # Controlled failure
-    # -----------------------------------------------------
-
     def fake_failure(**kwargs):
-
         raise RuntimeError(
             "Controlled Razorpay Test Mode API failure "
             "for graceful demonstration."
@@ -449,10 +614,6 @@ def simulate_failure():
         }
 
     finally:
-
-        # -------------------------------------------------
-        # ALWAYS restore the real implementation.
-        # -------------------------------------------------
 
         workflow.create_payment_link = (
             original

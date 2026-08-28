@@ -30,15 +30,18 @@ const WORKFLOW_STAGES = [
   },
 ];
 
+
 function App() {
   const [loading, setLoading] = useState(false);
   const [failureLoading, setFailureLoading] = useState(false);
+
   const [result, setResult] = useState(null);
 
   const [auditEvents, setAuditEvents] = useState([]);
   const [auditLoading, setAuditLoading] = useState(false);
 
   const [activeStage, setActiveStage] = useState(null);
+
 
   // =========================================================
   // FETCH AUDIT
@@ -48,25 +51,36 @@ function App() {
     setAuditLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/audit`);
+      const response = await fetch(
+        `${API_URL}/audit`
+      );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch audit trail");
+        throw new Error(
+          "Failed to fetch audit trail"
+        );
       }
 
       const data = await response.json();
 
-      setAuditEvents(data.events || []);
+      setAuditEvents(
+        data.events || []
+      );
     } catch (error) {
-      console.error("Audit fetch failed:", error);
+      console.error(
+        "Audit fetch failed:",
+        error
+      );
     } finally {
       setAuditLoading(false);
     }
   };
 
+
   useEffect(() => {
     fetchAudit();
   }, []);
+
 
   // =========================================================
   // EXECUTE GROWTH WORKFLOW
@@ -80,19 +94,25 @@ function App() {
     setActiveStage(1);
 
     try {
-      const response = await fetch(`${API_URL}/growth/execute`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mode: "test",
-        }),
-      });
+      const response = await fetch(
+        `${API_URL}/growth/execute`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mode: "test",
+          }),
+        }
+      );
 
       const data = await response.json();
 
-      console.log("GROWTH EXECUTE RESPONSE:", data);
+      console.log(
+        "GROWTH EXECUTE RESPONSE:",
+        data
+      );
 
       if (!response.ok) {
         throw new Error(
@@ -102,59 +122,63 @@ function App() {
         );
       }
 
+
       // -------------------------------------------------------
-      // Stage 1: Analyze Merchant
+      // Stage 1
       // -------------------------------------------------------
 
       setActiveStage(1);
 
-      await delay(300);
+      await delay(350);
+
 
       // -------------------------------------------------------
-      // Stage 2: Find Upsell
+      // Stage 2
       // -------------------------------------------------------
 
       setActiveStage(2);
 
-      await delay(300);
+      await delay(350);
+
 
       // -------------------------------------------------------
-      // Stage 3: Policy Validation
+      // Stage 3
       // -------------------------------------------------------
 
       setActiveStage(3);
 
-      await delay(300);
+      await delay(350);
+
 
       // -------------------------------------------------------
-      // Stage 4: Payment Link
+      // Stage 4
       // -------------------------------------------------------
 
       setActiveStage(4);
 
-      await delay(300);
+      await delay(350);
+
 
       // -------------------------------------------------------
-      // Stage 5: Audit Trail
+      // Stage 5
       // -------------------------------------------------------
 
       if (data.success === true) {
         setActiveStage(5);
       } else {
-        /*
-         * The backend explicitly reported a controlled failure.
-         *
-         * We keep the workflow at the payment stage rather than
-         * pretending that a successful payment link was created.
-         */
         setActiveStage(4);
       }
 
       setResult(data);
 
       await fetchAudit();
+
     } catch (error) {
-      console.error("Growth execution failed:", error);
+
+      console.error(
+        "Growth execution failed:",
+        error
+      );
 
       setActiveStage(null);
 
@@ -162,26 +186,35 @@ function App() {
         success: false,
         stage: "frontend",
         reason: error.message,
+        amount: null,
+        currency: "INR",
+        payment_link_id: null,
+        short_url: null,
+        opportunity: null,
       });
 
       await fetchAudit();
+
     } finally {
       setLoading(false);
     }
   };
+
 
   // =========================================================
   // CONTROLLED FAILURE SIMULATION
   // =========================================================
 
   const executeFailureSimulation = async () => {
+
     setFailureLoading(true);
     setLoading(false);
-    setResult(null);
 
+    setResult(null);
     setActiveStage(1);
 
     try {
+
       const response = await fetch(
         `${API_URL}/growth/simulate-failure`,
         {
@@ -197,7 +230,10 @@ function App() {
 
       const data = await response.json();
 
-      console.log("FAILURE SIMULATION RESPONSE:", data);
+      console.log(
+        "FAILURE SIMULATION RESPONSE:",
+        data
+      );
 
       if (!response.ok) {
         throw new Error(
@@ -207,18 +243,19 @@ function App() {
         );
       }
 
-      // Failure is deliberately injected at payment stage.
+      // Failure occurs at payment execution.
       setActiveStage(4);
 
       setResult(data);
 
       await fetchAudit();
 
-      // Allow the UI to show the stopped state.
-      await delay(500);
+      await delay(700);
 
       setActiveStage(null);
+
     } catch (error) {
+
       console.error(
         "Failure simulation failed:",
         error
@@ -230,17 +267,28 @@ function App() {
         success: false,
         stage: "frontend",
         reason: error.message,
+        amount: null,
+        currency: "INR",
+        payment_link_id: null,
+        short_url: null,
+        opportunity: null,
       });
 
       await fetchAudit();
+
     } finally {
       setFailureLoading(false);
     }
   };
 
+
   // =========================================================
   // RENDER
   // =========================================================
+
+  const opportunity =
+    result?.opportunity || null;
+
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -280,8 +328,11 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">
+
               <span className="h-2 w-2 rounded-full bg-amber-500" />
+
               TEST MODE
+
             </div>
 
           </div>
@@ -296,6 +347,7 @@ function App() {
       ===================================================== */}
 
       <main className="mx-auto max-w-7xl px-6 py-10">
+
 
         {/* ===================================================
             HERO
@@ -348,9 +400,11 @@ function App() {
                 </p>
 
                 <p className="mt-2 text-2xl font-bold">
+
                   {loading || failureLoading
                     ? "Executing"
                     : "Ready"}
+
                 </p>
 
               </div>
@@ -362,7 +416,9 @@ function App() {
                     : "bg-emerald-100 text-emerald-700"
                 }`}
               >
-                {loading || failureLoading ? "…" : "✓"}
+                {loading || failureLoading
+                  ? "…"
+                  : "✓"}
               </div>
 
             </div>
@@ -421,7 +477,7 @@ function App() {
           <MetricCard
             label="Merchant"
             value={
-              result?.opportunity?.merchant_name ||
+              opportunity?.merchant_name ||
               "Demo Merchant"
             }
             icon="◆"
@@ -430,8 +486,8 @@ function App() {
           <MetricCard
             label="Base Product"
             value={formatRupees(
-              result?.opportunity?.base_amount,
-              "₹50,000"
+              opportunity?.base_amount,
+              "—"
             )}
             icon="₹"
           />
@@ -439,8 +495,8 @@ function App() {
           <MetricCard
             label="Allowed Upsell"
             value={formatRupees(
-              result?.opportunity?.upsell_amount,
-              "₹5,000"
+              opportunity?.upsell_amount,
+              "—"
             )}
             icon="+"
           />
@@ -448,9 +504,9 @@ function App() {
           <MetricCard
             label="Customer Value"
             value={formatRupees(
-              result?.opportunity?.final_amount ||
+              opportunity?.final_amount ||
                 result?.amount,
-              "₹55,000"
+              "—"
             )}
             icon="↗"
           />
@@ -471,22 +527,24 @@ function App() {
 
           <div className="mt-6 grid gap-3 md:grid-cols-5">
 
-            {WORKFLOW_STAGES.map((stage, index) => (
+            {WORKFLOW_STAGES.map(
+              (stage, index) => (
 
-              <WorkflowStep
-                key={stage.number}
-                {...stage}
-                active={
-                  activeStage !== null &&
-                  activeStage === index + 1
-                }
-                completed={
-                  activeStage !== null &&
-                  activeStage > index + 1
-                }
-              />
+                <WorkflowStep
+                  key={stage.number}
+                  {...stage}
+                  active={
+                    activeStage !== null &&
+                    activeStage === index + 1
+                  }
+                  completed={
+                    activeStage !== null &&
+                    activeStage > index + 1
+                  }
+                />
 
-            ))}
+              )
+            )}
 
           </div>
 
@@ -509,43 +567,56 @@ function App() {
             <EvidenceCard
               label="Highest-Value Product"
               title={
-                result?.opportunity?.base_product_name ||
-                "Premium Annual Plan"
+                opportunity?.base_product_name ||
+                opportunity?.base_product ||
+                "Waiting for agent"
               }
               amount={formatRupees(
-                result?.opportunity?.base_amount,
-                "₹50,000"
+                opportunity?.base_amount,
+                "—"
               )}
               metric={
-                result?.opportunity?.base_product_evidence ||
-                result?.opportunity?.historical_purchases ||
-                "100 historical purchases"
+                opportunity?.base_product_evidence ||
+                (
+                  opportunity?.historical_purchases !==
+                  undefined
+                    ? `${opportunity.historical_purchases} historical purchases`
+                    : "No evidence yet"
+                )
               }
               description={
-                result?.opportunity?.base_product_reason ||
-                "The agent identifies the merchant's highest-value product as the base offer."
+                opportunity?.base_product_reason ||
+                "Execute the growth workflow to obtain the merchant-specific recommendation."
               }
             />
+
 
             <EvidenceCard
               label="Evidence-Backed Upsell"
               title={
-                result?.opportunity?.upsell_product_name ||
-                "Premium Support"
+                opportunity?.upsell_product_name ||
+                opportunity?.upsell_product ||
+                "Waiting for agent"
               }
               amount={formatRupees(
-                result?.opportunity?.upsell_amount,
-                "₹5,000"
+                opportunity?.upsell_amount,
+                "—"
               )}
               metric={
-                result?.opportunity?.upsell_evidence ||
-                result?.opportunity?.conversion_rate ||
-                "25% historical conversion"
+                opportunity?.upsell_evidence ||
+                (
+                  opportunity?.conversion_rate !==
+                  undefined
+                    ? `${Number(
+                        opportunity.conversion_rate *
+                          100
+                      ).toFixed(0)}% historical conversion`
+                    : "No evidence yet"
+                )
               }
               description={
-                result?.opportunity?.upsell_reason ||
-                result?.opportunity?.evidence ||
-                "Historical merchant behavior provides evidence for the support upsell."
+                opportunity?.upsell_reason ||
+                "The agent will use historical merchant evidence to select the upsell."
               }
             />
 
@@ -579,23 +650,33 @@ function App() {
 
                   <h3 className="mt-2 text-2xl font-bold">
 
-                    {result?.opportunity?.base_product_name ||
-                      "Premium Annual Plan"}
+                    {opportunity?.base_product_name ||
+                      opportunity?.base_product ||
+                      "No recommendation yet"}
 
-                    <span className="mx-2 text-slate-300">
-                      +
-                    </span>
+                    {(
+                      opportunity?.upsell_product_name ||
+                      opportunity?.upsell_product
+                    ) && (
+                      <>
+                        <span className="mx-2 text-slate-300">
+                          +
+                        </span>
 
-                    {result?.opportunity?.upsell_product_name ||
-                      "Premium Support"}
+                        {opportunity?.upsell_product_name ||
+                          opportunity?.upsell_product}
+                      </>
+                    )}
 
                   </h3>
 
                 </div>
 
-                <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">
-                  Evidence-backed
-                </span>
+                {opportunity && (
+                  <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">
+                    Evidence-backed
+                  </span>
+                )}
 
               </div>
 
@@ -605,26 +686,43 @@ function App() {
                 <Reason
                   title="Product selection"
                   text={
-                    result?.opportunity?.base_product_reason ||
-                    result?.opportunity?.reason ||
-                    "Highest-value product selected from merchant data."
+                    opportunity?.base_product_reason ||
+                    "The agent will identify the highest-value merchant product."
                   }
                 />
 
                 <Reason
                   title="Upsell selection"
                   text={
-                    result?.opportunity?.upsell_reason ||
-                    result?.opportunity?.evidence ||
-                    "Premium Support is supported by historical conversion evidence."
+                    opportunity?.upsell_reason ||
+                    opportunity?.reason ||
+                    "The agent will select an evidence-backed upsell."
+                  }
+                />
+
+                <Reason
+                  title="Historical evidence"
+                  text={
+                    opportunity
+                      ? (
+                          opportunity.evidence_strength
+                            ? `Evidence strength: ${opportunity.evidence_strength}.`
+                            : (
+                                opportunity.historical_purchases !==
+                                undefined
+                                  ? `${opportunity.historical_purchases} historical purchases support the recommendation.`
+                                  : "Historical evidence was evaluated."
+                              )
+                        )
+                      : "No opportunity has been executed yet."
                   }
                 />
 
                 <Reason
                   title="Financial boundary"
                   text={
-                    result?.opportunity?.policy_reason ||
-                    "Upsell amount remains within the deterministic 10% autonomy limit."
+                    opportunity?.policy_reason ||
+                    "The deterministic policy engine controls whether the financial action is permitted."
                   }
                 />
 
@@ -646,17 +744,21 @@ function App() {
                 <AmountRow
                   label="Base product"
                   value={formatRupees(
-                    result?.opportunity?.base_amount,
-                    "₹50,000"
+                    opportunity?.base_amount,
+                    "—"
                   )}
                 />
 
                 <AmountRow
                   label="Autonomous upsell"
-                  value={`+ ${formatRupees(
-                    result?.opportunity?.upsell_amount,
-                    "₹5,000"
-                  )}`}
+                  value={
+                    opportunity?.upsell_amount !==
+                    undefined
+                      ? `+ ${formatRupees(
+                          opportunity.upsell_amount
+                        )}`
+                      : "—"
+                  }
                 />
 
                 <div className="border-t" />
@@ -664,9 +766,9 @@ function App() {
                 <AmountRow
                   label="Final customer amount"
                   value={formatRupees(
-                    result?.opportunity?.final_amount ||
+                    opportunity?.final_amount ||
                       result?.amount,
-                    "₹55,000"
+                    "—"
                   )}
                   highlight
                 />
@@ -729,7 +831,10 @@ function App() {
 
               <button
                 onClick={executeGrowth}
-                disabled={loading || failureLoading}
+                disabled={
+                  loading ||
+                  failureLoading
+                }
                 className="group rounded-xl bg-slate-900 px-6 py-4 text-sm font-bold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
               >
 
@@ -756,8 +861,13 @@ function App() {
 
 
               <button
-                onClick={executeFailureSimulation}
-                disabled={loading || failureLoading}
+                onClick={
+                  executeFailureSimulation
+                }
+                disabled={
+                  loading ||
+                  failureLoading
+                }
                 className="group rounded-xl border border-red-200 bg-red-50 px-6 py-4 text-sm font-bold text-red-700 transition hover:border-red-300 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
               >
 
@@ -806,9 +916,13 @@ function App() {
           <section className="mt-8">
 
             {result.success ? (
-              <SuccessResult result={result} />
+              <SuccessResult
+                result={result}
+              />
             ) : (
-              <FailureResult result={result} />
+              <FailureResult
+                result={result}
+              />
             )}
 
           </section>
@@ -856,17 +970,20 @@ function App() {
 
                 <div className="space-y-0">
 
-                  {auditEvents.map((event, index) => (
+                  {auditEvents.map(
+                    (event, index) => (
 
-                    <AuditEvent
-                      key={`${event.timestamp}-${index}`}
-                      event={event}
-                      last={
-                        index === auditEvents.length - 1
-                      }
-                    />
+                      <AuditEvent
+                        key={`${event.timestamp}-${index}`}
+                        event={event}
+                        last={
+                          index ===
+                          auditEvents.length - 1
+                        }
+                      />
 
-                  ))}
+                    )
+                  )}
 
                 </div>
 
@@ -958,7 +1075,11 @@ function App() {
 // COMPONENTS
 // =========================================================
 
-function MetricCard({ label, value, icon }) {
+function MetricCard({
+  label,
+  value,
+  icon,
+}) {
   return (
     <div className="rounded-2xl border bg-white p-5 shadow-sm">
 
@@ -1046,7 +1167,10 @@ function WorkflowStep({
 // SECTION HEADER
 // =========================================================
 
-function SectionHeader({ title, subtitle }) {
+function SectionHeader({
+  title,
+  subtitle,
+}) {
   return (
     <div>
 
@@ -1114,7 +1238,10 @@ function EvidenceCard({
 // REASON
 // =========================================================
 
-function Reason({ title, text }) {
+function Reason({
+  title,
+  text,
+}) {
   return (
     <div className="flex items-start gap-3">
 
@@ -1174,8 +1301,12 @@ function AmountRow({
 // SUCCESS RESULT
 // =========================================================
 
-function SuccessResult({ result }) {
-  const opportunity = result.opportunity || {};
+function SuccessResult({
+  result,
+}) {
+
+  const opportunity =
+    result.opportunity || {};
 
   const amount =
     result.amount ??
@@ -1225,6 +1356,7 @@ function SuccessResult({ result }) {
             <p className="mt-2 text-sm font-bold text-slate-900">
 
               {opportunity.base_product_name ||
+                opportunity.base_product ||
                 "Base Product"}
 
               <span className="mx-2 text-slate-300">
@@ -1232,6 +1364,7 @@ function SuccessResult({ result }) {
               </span>
 
               {opportunity.upsell_product_name ||
+                opportunity.upsell_product ||
                 "Upsell"}
 
             </p>
@@ -1248,6 +1381,7 @@ function SuccessResult({ result }) {
               ).toLocaleString("en-IN")}`}
             />
 
+
             <ResultCard
               label="Payment Link ID"
               value={
@@ -1256,6 +1390,7 @@ function SuccessResult({ result }) {
               }
               small
             />
+
 
             <div className="rounded-xl border border-emerald-200 bg-white p-4">
 
@@ -1286,6 +1421,46 @@ function SuccessResult({ result }) {
 
           </div>
 
+
+          {/* Actual execution reasoning */}
+
+          {opportunity.reasoning?.length > 0 && (
+
+            <div className="mt-5 rounded-xl border border-emerald-200 bg-white p-4">
+
+              <p className="text-xs font-semibold text-slate-500">
+                Agent reasoning
+              </p>
+
+              <ul className="mt-3 space-y-2">
+
+                {opportunity.reasoning.map(
+                  (reason, index) => (
+
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-sm text-slate-600"
+                    >
+
+                      <span className="text-emerald-600">
+                        ✓
+                      </span>
+
+                      <span>
+                        {reason}
+                      </span>
+
+                    </li>
+
+                  )
+                )}
+
+              </ul>
+
+            </div>
+
+          )}
+
         </div>
 
       </div>
@@ -1299,7 +1474,10 @@ function SuccessResult({ result }) {
 // FAILURE RESULT
 // =========================================================
 
-function FailureResult({ result }) {
+function FailureResult({
+  result,
+}) {
+
   return (
     <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
 
@@ -1337,7 +1515,8 @@ function FailureResult({ result }) {
             <ResultCard
               label="Workflow Stage"
               value={formatEventName(
-                result.stage || "Unknown"
+                result.stage ||
+                  "Unknown"
               )}
               danger
             />
@@ -1394,7 +1573,9 @@ function FailureResult({ result }) {
 // SAFETY CHECK
 // =========================================================
 
-function SafetyCheck({ text }) {
+function SafetyCheck({
+  text,
+}) {
   return (
     <div className="flex items-center gap-2">
 
@@ -1455,11 +1636,19 @@ function ResultCard({
 // AUDIT EVENT
 // =========================================================
 
-function AuditEvent({ event, last }) {
-  const status = event.status;
+function AuditEvent({
+  event,
+  last,
+}) {
 
-  const isPass = status === "PASS";
-  const isFail = status === "FAIL";
+  const status =
+    event.status;
+
+  const isPass =
+    status === "PASS";
+
+  const isFail =
+    status === "FAIL";
 
   return (
     <div className="relative flex gap-4">
@@ -1477,11 +1666,13 @@ function AuditEvent({ event, last }) {
             : "bg-slate-100 text-slate-600"
         }`}
       >
+
         {isPass
           ? "✓"
           : isFail
           ? "!"
           : "i"}
+
       </div>
 
 
@@ -1492,18 +1683,23 @@ function AuditEvent({ event, last }) {
           <div>
 
             <p className="break-words font-semibold">
-              {formatEventName(event.event)}
+              {formatEventName(
+                event.event
+              )}
             </p>
 
             {event.timestamp && (
 
               <p className="mt-1 text-xs text-slate-400">
-                {formatTimestamp(event.timestamp)}
+                {formatTimestamp(
+                  event.timestamp
+                )}
               </p>
 
             )}
 
           </div>
+
 
           <span
             className={`rounded-full px-3 py-1 text-xs font-bold ${
@@ -1524,27 +1720,33 @@ function AuditEvent({ event, last }) {
 
           <div className="mt-3 flex flex-wrap gap-2">
 
-            {Object.entries(event.details)
+            {Object.entries(
+              event.details
+            )
               .filter(
                 ([key]) =>
                   !isSensitiveField(key)
               )
-              .map(([key, value]) => (
+              .map(
+                ([key, value]) => (
 
-                <span
-                  key={key}
-                  className="max-w-full break-words rounded-lg bg-slate-50 px-3 py-1.5 text-xs text-slate-600"
-                >
+                  <span
+                    key={key}
+                    className="max-w-full break-words rounded-lg bg-slate-50 px-3 py-1.5 text-xs text-slate-600"
+                  >
 
-                  <span className="font-semibold">
-                    {formatKey(key)}:
-                  </span>{" "}
+                    <span className="font-semibold">
+                      {formatKey(key)}:
+                    </span>{" "}
 
-                  {formatAuditValue(value)}
+                    {formatAuditValue(
+                      value
+                    )}
 
-                </span>
+                  </span>
 
-              ))}
+                )
+              )}
 
           </div>
 
@@ -1616,13 +1818,18 @@ function FeatureCard({
 // =========================================================
 
 function delay(ms) {
-  return new Promise((resolve) =>
-    setTimeout(resolve, ms)
+  return new Promise(
+    (resolve) =>
+      setTimeout(resolve, ms)
   );
 }
 
 
-function formatRupees(value, fallback = "₹0") {
+function formatRupees(
+  value,
+  fallback = "₹0"
+) {
+
   if (
     value === null ||
     value === undefined ||
@@ -1631,58 +1838,94 @@ function formatRupees(value, fallback = "₹0") {
     return fallback;
   }
 
-  const numericValue = Number(value);
+  const numericValue =
+    Number(value);
 
-  if (Number.isNaN(numericValue)) {
+  if (
+    Number.isNaN(
+      numericValue
+    )
+  ) {
     return fallback;
   }
 
-  return `₹${numericValue.toLocaleString("en-IN")}`;
+  return `₹${numericValue.toLocaleString(
+    "en-IN"
+  )}`;
 }
 
 
-function formatAuditValue(value) {
+function formatAuditValue(
+  value
+) {
+
   if (
     value !== null &&
     typeof value === "object"
   ) {
+
     try {
-      return JSON.stringify(value);
+      return JSON.stringify(
+        value
+      );
     } catch {
       return String(value);
     }
+
   }
 
   return String(value);
 }
 
 
-function formatEventName(value) {
+function formatEventName(
+  value
+) {
+
   if (!value) {
     return "Unknown Event";
   }
 
   return String(value)
-    .replaceAll("_", " ")
+    .replaceAll(
+      "_",
+      " "
+    )
     .toLowerCase()
-    .replace(/\b\w/g, (char) =>
-      char.toUpperCase()
+    .replace(
+      /\b\w/g,
+      (char) =>
+        char.toUpperCase()
     );
 }
 
 
-function formatKey(value) {
+function formatKey(
+  value
+) {
+
   return String(value)
-    .replaceAll("_", " ")
-    .replace(/\b\w/g, (char) =>
-      char.toUpperCase()
+    .replaceAll(
+      "_",
+      " "
+    )
+    .replace(
+      /\b\w/g,
+      (char) =>
+        char.toUpperCase()
     );
 }
 
 
-function formatTimestamp(timestamp) {
+function formatTimestamp(
+  timestamp
+) {
+
   try {
-    return new Date(timestamp).toLocaleString(
+
+    return new Date(
+      timestamp
+    ).toLocaleString(
       "en-IN",
       {
         day: "2-digit",
@@ -1693,13 +1936,19 @@ function formatTimestamp(timestamp) {
         second: "2-digit",
       }
     );
+
   } catch {
+
     return timestamp;
+
   }
 }
 
 
-function isSensitiveField(key) {
+function isSensitiveField(
+  key
+) {
+
   const sensitiveFields = [
     "secret",
     "password",
