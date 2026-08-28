@@ -42,12 +42,15 @@ def get_merchant_snapshot():
 
 def _get_upsell_evidence():
     """
-    Return historical evidence for bounded upsell
-    opportunities.
+    Return deterministic historical evidence for the
+    bounded upsell opportunity.
 
-    This is deterministic merchant evidence.
+    This evidence is used only to identify an opportunity.
 
     It does NOT authorize a transaction.
+
+    Financial authorization remains the responsibility
+    of the deterministic policy layer.
     """
 
     return [
@@ -59,6 +62,10 @@ def _get_upsell_evidence():
         }
     ]
 
+
+# -------------------------------------------------------
+# Growth Evidence Interface
+# -------------------------------------------------------
 
 def get_growth_evidence():
     """
@@ -75,3 +82,4 @@ def get_growth_evidence():
         "products": snapshot["products"],
         "upsell_evidence": snapshot["upsell_evidence"],
     }
+
