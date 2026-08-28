@@ -18,11 +18,6 @@ ALLOWED_OPERATIONS = {
     "payment_link",
 }
 
-
-# --------------------------------------------------
-# Autonomous payment safety boundary
-# --------------------------------------------------
-
 MAX_AUTONOMOUS_AMOUNT = 2000
 
 
@@ -52,10 +47,6 @@ def validate_payment_plan(
         False,
     )
 
-    # --------------------------------------------------
-    # No Razorpay operation
-    # --------------------------------------------------
-
     if not requires_razorpay:
 
         return {
@@ -65,10 +56,6 @@ def validate_payment_plan(
                 "No Razorpay functionality detected."
             ),
         }
-
-    # --------------------------------------------------
-    # Validate operation
-    # --------------------------------------------------
 
     operation = plan.get(
         "payment_operation"
@@ -85,10 +72,6 @@ def validate_payment_plan(
             ),
         }
 
-    # --------------------------------------------------
-    # Validate risk level
-    # --------------------------------------------------
-
     risk_level = plan.get(
         "risk_level",
         "high",
@@ -104,10 +87,6 @@ def validate_payment_plan(
                 f"{risk_level}"
             ),
         }
-
-    # --------------------------------------------------
-    # Validate monetary amount
-    # --------------------------------------------------
 
     amount = plan.get(
         "amount"
@@ -170,10 +149,6 @@ def validate_payment_plan(
                 ),
             }
 
-        # --------------------------------------------------
-        # Autonomous safety boundary
-        # --------------------------------------------------
-
         if amount > MAX_AUTONOMOUS_AMOUNT:
 
             return {
@@ -186,10 +161,6 @@ def validate_payment_plan(
                 ),
             }
 
-    # --------------------------------------------------
-    # Determine human approval requirement
-    # --------------------------------------------------
-
     requires_approval = (
         plan.get(
             "requires_human_approval",
@@ -200,10 +171,6 @@ def validate_payment_plan(
             "high",
         }
     )
-
-    # --------------------------------------------------
-    # Successful validation
-    # --------------------------------------------------
 
     return {
         "allowed": True,

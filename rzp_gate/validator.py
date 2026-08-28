@@ -35,10 +35,6 @@ def validate_changes(
             "",
         )
 
-        # ------------------------------------------
-        # Check known Razorpay secret formats
-        # ------------------------------------------
-
         for pattern in SECRET_PATTERNS:
 
             if re.search(
@@ -49,10 +45,6 @@ def validate_changes(
                     f"Possible Razorpay secret "
                     f"found in {path}"
                 )
-
-        # ------------------------------------------
-        # Check suspicious hardcoded secret variables
-        # ------------------------------------------
 
         for variable in SENSITIVE_VARIABLES:
 

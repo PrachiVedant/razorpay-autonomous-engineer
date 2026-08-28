@@ -42,10 +42,6 @@ def run_growth_cycle():
         agent="growth_loop",
     )
 
-    # --------------------------------------------------
-    # 1. LLM identifies an opportunity from real data
-    # --------------------------------------------------
-
     opportunity = identify_growth_opportunity()
 
     log_event(
@@ -53,10 +49,6 @@ def run_growth_cycle():
         agent="growth_agent",
         data=opportunity,
     )
-
-    # --------------------------------------------------
-    # 2. Deterministic validation
-    # --------------------------------------------------
 
     validation = validate_opportunity(opportunity)
 
@@ -80,11 +72,7 @@ def run_growth_cycle():
             "status": "rejected",
             "reason": validation["reason"],
         }
-
-    # --------------------------------------------------
-    # 3. Policy gate
-    # --------------------------------------------------
-
+    #policy gate
     plan = {
         "requires_razorpay": True,
         "payment_operation": "payment_link",
@@ -126,9 +114,7 @@ def run_growth_cycle():
             "opportunity": opportunity,
         }
 
-    # --------------------------------------------------
-    # 4. Find recoverable orders
-    # --------------------------------------------------
+    #recoverable orders
 
     orders = [
         order
@@ -152,9 +138,7 @@ def run_growth_cycle():
 
     order_id = target_order["order_id"]
 
-    # --------------------------------------------------
-    # 5. Idempotency / duplicate-action protection
-    # --------------------------------------------------
+    #idempotency
 
     existing_action = get_action(order_id)
 
@@ -175,10 +159,6 @@ def run_growth_cycle():
             "existing_action": existing_action,
         }
 
-    # --------------------------------------------------
-    # 6. Execute Razorpay action
-    # --------------------------------------------------
-
     actions = RazorpayActions()
 
     try:
@@ -186,10 +166,6 @@ def run_growth_cycle():
         link = actions.create_recovery_payment_link(
             target_order
         )
-
-        # --------------------------------------------------
-        # 7. Record successful action
-        # --------------------------------------------------
 
         record_action(
             order_id,
@@ -215,9 +191,7 @@ def run_growth_cycle():
             "payment_link": link,
         }
 
-    # --------------------------------------------------
-    # 8. Permanent / invalid request failure
-    # --------------------------------------------------
+    #invalid request failure
 
     except BadRequestError as error:
 
@@ -237,10 +211,6 @@ def run_growth_cycle():
             "escalated": True,
         }
 
-    # --------------------------------------------------
-    # 9. Transient Razorpay failure
-    # --------------------------------------------------
-
     except (ServerError, GatewayError) as error:
 
         log_event(
@@ -258,7 +228,7 @@ def run_growth_cycle():
                 target_order
             )
 
-            # Record successful retry as well
+            # Recording successful retries
             record_action(
                 order_id,
                 {

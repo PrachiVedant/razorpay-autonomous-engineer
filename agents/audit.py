@@ -13,10 +13,6 @@ class AuditEvents:
     coding workflow.
     """
 
-    # --------------------------------------------------
-    # Issue / Repository / Planning
-    # --------------------------------------------------
-
     ISSUE_RECEIVED = "ISSUE_RECEIVED"
     ISSUE_FETCH_FAILED = "ISSUE_FETCH_FAILED"
 
@@ -26,18 +22,13 @@ class AuditEvents:
     PLAN_CREATED = "PLAN_CREATED"
     PLAN_CREATION_FAILED = "PLAN_CREATION_FAILED"
 
-    # --------------------------------------------------
-    # Code Generation
-    # --------------------------------------------------
-
+    #code genration
     CODE_GENERATED = "CODE_GENERATED"
     CODE_GENERATION_FAILED = "CODE_GENERATION_FAILED"
     CODE_GENERATION_EMPTY = "CODE_GENERATION_EMPTY"
 
-    # --------------------------------------------------
-    # Validation
-    # --------------------------------------------------
-
+    
+    #validation
     CHANGE_VALIDATION_FAILED = "CHANGE_VALIDATION_FAILED"
 
     SECURITY_VALIDATION_PASSED = "SECURITY_VALIDATION_PASSED"
@@ -49,42 +40,26 @@ class AuditEvents:
 
     SENSITIVE_FILES_DETECTED = "SENSITIVE_FILES_DETECTED"
 
-    # --------------------------------------------------
-    # Razorpay Payment Risk
-    # --------------------------------------------------
+    #payment risk
 
     PAYMENT_POLICY_REJECTED = "PAYMENT_POLICY_REJECTED"
     PAYMENT_RISK_CLASSIFIED = "PAYMENT_RISK_CLASSIFIED"
 
-    # --------------------------------------------------
-    # Human Approval
-    # --------------------------------------------------
+    #human-loop-
 
     HUMAN_APPROVAL_REQUIRED = "HUMAN_APPROVAL_REQUIRED"
     HUMAN_APPROVAL_GRANTED = "HUMAN_APPROVAL_GRANTED"
     HUMAN_APPROVAL_DENIED = "HUMAN_APPROVAL_DENIED"
-
-    # --------------------------------------------------
-    # File Operations
-    # --------------------------------------------------
 
     FILES_READ = "FILES_READ"
     FILES_READ_FAILED = "FILES_READ_FAILED"
 
     CHANGES_APPLIED = "CHANGES_APPLIED"
     CHANGES_APPLICATION_FAILED = "CHANGES_APPLICATION_FAILED"
-
-    # --------------------------------------------------
-    # Testing
-    # --------------------------------------------------
-
+    #testing
     TEST_STARTED = "TEST_STARTED"
     TEST_FAILED = "TEST_FAILED"
     TEST_PASSED = "TEST_PASSED"
-
-    # --------------------------------------------------
-    # Autonomous Repair
-    # --------------------------------------------------
 
     REPAIR_LOOP_STARTED = "REPAIR_LOOP_STARTED"
     REPAIR_STARTED = "REPAIR_STARTED"
@@ -93,17 +68,10 @@ class AuditEvents:
     REPAIR_LOOP_COMPLETED = "REPAIR_LOOP_COMPLETED"
     REPAIR_LOOP_FAILED = "REPAIR_LOOP_FAILED"
 
-    # --------------------------------------------------
-    # Rollback
-    # --------------------------------------------------
-
     ROLLBACK_STARTED = "ROLLBACK_STARTED"
     ROLLBACK_COMPLETED = "ROLLBACK_COMPLETED"
     ROLLBACK_FAILED = "ROLLBACK_FAILED"
-
-    # --------------------------------------------------
-    # Git
-    # --------------------------------------------------
+    #git operations
 
     GIT_BRANCH_CREATED = "GIT_BRANCH_CREATED"
     GIT_BRANCH_CREATION_FAILED = "GIT_BRANCH_CREATION_FAILED"
@@ -114,25 +82,15 @@ class AuditEvents:
     GIT_PUSHED = "GIT_PUSHED"
     GIT_PUSH_FAILED = "GIT_PUSH_FAILED"
 
-    # --------------------------------------------------
-    # Pull Request
-    # --------------------------------------------------
 
     PULL_REQUEST_CREATED = "PULL_REQUEST_CREATED"
     PULL_REQUEST_CREATION_FAILED = (
         "PULL_REQUEST_CREATION_FAILED"
     )
-
-    # --------------------------------------------------
-    # Workflow
-    # --------------------------------------------------
+    #workflow
 
     WORKFLOW_COMPLETED = "WORKFLOW_COMPLETED"
     WORKFLOW_FAILED = "WORKFLOW_FAILED"
-
-        # --------------------------------------------------
-    # Merchant Growth / Agentic Commerce
-    # --------------------------------------------------
 
     GROWTH_OPPORTUNITY_IDENTIFIED = (
         "GROWTH_OPPORTUNITY_IDENTIFIED"

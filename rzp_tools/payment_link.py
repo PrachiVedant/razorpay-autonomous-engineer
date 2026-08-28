@@ -30,10 +30,6 @@ class PaymentLinkClient:
             "test",
         ).lower().strip()
 
-        # =================================================
-        # SECURITY BOUNDARY
-        # =================================================
-
         if self.mode != "test":
             raise RuntimeError(
                 "Payment Link client only supports "
@@ -57,8 +53,6 @@ class PaymentLinkClient:
             raise RuntimeError(
                 "RAZORPAY_KEY_SECRET is not configured."
             )
-
-        # IMPORTANT:
         # Credentials are used only to construct the
         # Razorpay client and are never returned or logged.
 
@@ -92,10 +86,6 @@ class PaymentLinkClient:
         returns a fake successful payment link.
         """
 
-        # =================================================
-        # Validate amount
-        # =================================================
-
         if not isinstance(
             amount,
             (int, float),
@@ -109,10 +99,6 @@ class PaymentLinkClient:
                 "Payment amount must be positive."
             )
 
-        # =================================================
-        # Validate reference ID
-        # =================================================
-
         if not reference_id:
             raise ValueError(
                 "Payment reference ID is required."
@@ -124,18 +110,11 @@ class PaymentLinkClient:
                 "40 characters."
             )
 
-        # =================================================
-        # Validate description
-        # =================================================
-
         if not description:
             raise ValueError(
                 "Payment description is required."
             )
-
-        # =================================================
-        # Controlled demo failure
-        # =================================================
+        #failure demo
 
         force_failure = os.getenv(
             "RAZORPAY_DEMO_FORCE_FAILURE",
@@ -153,10 +132,6 @@ class PaymentLinkClient:
                 "for graceful-failure demonstration."
             )
 
-        # =================================================
-        # Convert rupees → paise
-        # =================================================
-
         amount_in_paise = int(
             amount * 100
         )
@@ -167,10 +142,7 @@ class PaymentLinkClient:
             "description": description,
             "reference_id": reference_id,
         }
-
-        # =================================================
-        # REAL RAZORPAY TEST MODE API CALL
-        # =================================================
+        #razorpay api calls
 
         return self.client.payment_link.create(
             payload

@@ -50,9 +50,6 @@ def fake_order():
 
 def test_payment_link_failure_is_logged_and_escalated(monkeypatch, tmp_path):
 
-    # --------------------------------------------------
-    # Force the growth opportunity to be valid
-    # --------------------------------------------------
 
     monkeypatch.setattr(
         growth_loop,
@@ -66,10 +63,6 @@ def test_payment_link_failure_is_logged_and_escalated(monkeypatch, tmp_path):
         lambda opportunity: fake_validation(),
     )
 
-    # --------------------------------------------------
-    # Allow the policy gate
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_loop,
         "validate_payment_plan",
@@ -80,19 +73,11 @@ def test_payment_link_failure_is_logged_and_escalated(monkeypatch, tmp_path):
         },
     )
 
-    # --------------------------------------------------
-    # Provide one recoverable order
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_loop,
         "get_orders",
         lambda: [fake_order()],
     )
-
-    # --------------------------------------------------
-    # Force Razorpay action to fail
-    # --------------------------------------------------
 
     class FakeActions:
 
@@ -108,15 +93,7 @@ def test_payment_link_failure_is_logged_and_escalated(monkeypatch, tmp_path):
         FakeActions,
     )
 
-    # --------------------------------------------------
-    # Run the actual growth cycle
-    # --------------------------------------------------
-
     result = growth_loop.run_growth_cycle()
-
-    # --------------------------------------------------
-    # Verify graceful failure
-    # --------------------------------------------------
 
     assert result["status"] == "failed"
 

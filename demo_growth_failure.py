@@ -35,14 +35,6 @@ MERCHANT_SNAPSHOT = {
 
 if __name__ == "__main__":
 
-    # --------------------------------------------------
-    # Enable deterministic Razorpay execution failure.
-    #
-    # This does NOT create a fake payment.
-    # It forces the execution layer to raise an exception
-    # so the workflow's real failure handling is demonstrated.
-    # --------------------------------------------------
-
     os.environ[
         "RAZORPAY_DEMO_FORCE_FAILURE"
     ] = "1"
@@ -96,8 +88,6 @@ if __name__ == "__main__":
     print()
 
     if result["success"]:
-
-        # This should NEVER happen during the failure demo.
         print(
             "UNEXPECTED SUCCESS"
         )

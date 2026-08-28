@@ -8,11 +8,6 @@ from api.main import (
 
 client = TestClient(app)
 
-
-# =========================================================
-# HEALTH CHECK
-# =========================================================
-
 def test_health_check():
 
     response = client.get("/")
@@ -22,11 +17,6 @@ def test_health_check():
     data = response.json()
 
     assert data["status"] == "ok"
-
-
-# =========================================================
-# AUDIT ENDPOINT
-# =========================================================
 
 def test_audit_endpoint():
 
@@ -38,10 +28,6 @@ def test_audit_endpoint():
 
     assert "events" in data
 
-
-# =========================================================
-# MODE VALIDATION
-# =========================================================
 
 def test_live_mode_is_rejected():
 
@@ -76,17 +62,7 @@ def test_test_mode_is_accepted():
         },
     )
 
-    # The API request itself must be accepted.
-    #
-    # The workflow may succeed or fail depending on
-    # configured Razorpay Test Mode credentials.
-
     assert response.status_code == 200
-
-
-# =========================================================
-# RESPONSE NORMALIZATION
-# =========================================================
 
 def test_normalize_growth_response_success():
 

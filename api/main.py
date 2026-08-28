@@ -9,11 +9,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-
-# =========================================================
-# PROJECT SETUP
-# =========================================================
-
 ROOT_DIR = os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
@@ -21,28 +16,14 @@ ROOT_DIR = os.path.dirname(
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
-
-# =========================================================
-# APPLICATION IMPORTS
-# =========================================================
-
 from agents.growth_workflow import run_growth_workflow
 from merchant.tools import get_merchant_snapshot
-
-
-# =========================================================
-# FASTAPI
-# =========================================================
 
 app = FastAPI(
     title="Razorpay Autonomous Growth Agent",
     version="1.0.0",
 )
 
-
-# =========================================================
-# CORS
-# =========================================================
 
 app.add_middleware(
     CORSMiddleware,
@@ -55,10 +36,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# =========================================================
-# SECURITY HELPERS
-# =========================================================
 
 SENSITIVE_PATTERNS = [
     r"RAZORPAY_KEY_ID",
@@ -138,11 +115,7 @@ def sanitize_audit_event(event):
 
     return event
 
-
-# =========================================================
-# OPPORTUNITY NORMALIZATION
-# =========================================================
-
+#opportunity
 def normalize_opportunity(opportunity):
     """
     Convert the internal growth-agent opportunity into
@@ -228,10 +201,6 @@ def normalize_opportunity(opportunity):
 
     normalized = dict(opportunity)
 
-    # -----------------------------------------------------
-    # Stable names used by the frontend
-    # -----------------------------------------------------
-
     normalized["base_product_name"] = (
         base_product
     )
@@ -240,10 +209,7 @@ def normalize_opportunity(opportunity):
         upsell_product
     )
 
-    # -----------------------------------------------------
-    # Evidence presentation
-    # -----------------------------------------------------
-
+    #evidence
     normalized["base_product_evidence"] = (
         f"{historical_purchases:g} historical purchases"
         if isinstance(
@@ -286,10 +252,6 @@ def normalize_opportunity(opportunity):
         )
     )
 
-    # -----------------------------------------------------
-    # Policy presentation
-    # -----------------------------------------------------
-
     if (
         isinstance(upsell_percentage, (int, float))
         and upsell_percentage <= 0.10
@@ -305,10 +267,6 @@ def normalize_opportunity(opportunity):
             "The deterministic policy engine controls "
             "whether the financial action is permitted."
         )
-
-    # -----------------------------------------------------
-    # Evidence summary
-    # -----------------------------------------------------
 
     normalized["evidence_summary"] = (
         evidence
@@ -328,10 +286,6 @@ def normalize_opportunity(opportunity):
 
     return normalized
 
-
-# =========================================================
-# RESPONSE NORMALIZATION
-# =========================================================
 
 def normalize_growth_response(result):
     """
@@ -389,11 +343,7 @@ def normalize_growth_response(result):
         "opportunity": opportunity,
     }
 
-
-# =========================================================
-# AUDIT LOG
-# =========================================================
-
+#logging
 AUDIT_FILE = os.path.join(
     ROOT_DIR,
     "audit_log.jsonl",
@@ -445,10 +395,6 @@ def read_audit_log(
     return events[-limit:][::-1]
 
 
-# =========================================================
-# AUDIT ENDPOINT
-# =========================================================
-
 @app.get("/audit")
 def get_audit():
     """
@@ -460,10 +406,6 @@ def get_audit():
     }
 
 
-# =========================================================
-# REQUEST MODELS
-# =========================================================
-
 class GrowthRequest(BaseModel):
     """
     Growth execution request.
@@ -474,10 +416,6 @@ class GrowthRequest(BaseModel):
     mode: Literal["test"] = "test"
 
 
-# =========================================================
-# HEALTH CHECK
-# =========================================================
-
 @app.get("/")
 def root():
     return {
@@ -486,10 +424,6 @@ def root():
         "mode": "test",
     }
 
-
-# =========================================================
-# EXECUTE GROWTH WORKFLOW
-# =========================================================
 
 @app.post("/growth/execute")
 def execute_growth(
@@ -551,10 +485,6 @@ def execute_growth(
             "opportunity": None,
         }
 
-
-# =========================================================
-# SIMULATE CONTROLLED FAILURE
-# =========================================================
 
 @app.post("/growth/simulate-failure")
 def simulate_failure():

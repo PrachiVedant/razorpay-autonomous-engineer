@@ -38,10 +38,6 @@ def verify_payment_link(
         }
     """
 
-    # =====================================================
-    # 1. Validate response type
-    # =====================================================
-
     if not isinstance(payment_link, dict):
         return {
             "verified": False,
@@ -49,10 +45,6 @@ def verify_payment_link(
                 "Payment Link response is not a dictionary."
             ),
         }
-
-    # =====================================================
-    # 2. Validate Payment Link ID
-    # =====================================================
 
     payment_link_id = payment_link.get("id")
 
@@ -64,11 +56,7 @@ def verify_payment_link(
             ),
         }
 
-    # =====================================================
-    # 3. Validate short URL
-    # =====================================================
-
-    short_url = payment_link.get("short_url")
+    short_url = payment_link.get("short_url") # allows 40
 
     if not short_url:
         return {
@@ -78,10 +66,6 @@ def verify_payment_link(
                 "short URL."
             ),
         }
-
-    # =====================================================
-    # 4. Validate amount if Razorpay returned it
-    # =====================================================
 
     returned_amount = payment_link.get("amount")
 
@@ -100,10 +84,6 @@ def verify_payment_link(
                 ),
             }
 
-    # =====================================================
-    # 5. Validate currency if Razorpay returned it
-    # =====================================================
-
     returned_currency = payment_link.get("currency")
 
     if returned_currency is not None:
@@ -116,10 +96,6 @@ def verify_payment_link(
                     "the expected currency."
                 ),
             }
-
-    # =====================================================
-    # 6. Verification successful
-    # =====================================================
 
     return {
         "verified": True,

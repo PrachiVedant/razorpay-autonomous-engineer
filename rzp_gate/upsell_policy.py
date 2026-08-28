@@ -60,9 +60,7 @@ def validate_upsell(
         "evidence"
     )
 
-    # --------------------------------------------------
     # Amount validation
-    # --------------------------------------------------
 
     if not isinstance(
         base_amount,
@@ -103,9 +101,7 @@ def validate_upsell(
             "Final amount must be positive."
         )
 
-    # --------------------------------------------------
     # Bounded upsell
-    # --------------------------------------------------
 
     if (
         isinstance(base_amount, (int, float))
@@ -131,10 +127,7 @@ def validate_upsell(
 
     else:
         upsell_percentage = None
-
-    # --------------------------------------------------
-    # Final payment amount
-    # --------------------------------------------------
+    #final
 
     if (
         isinstance(final_amount, (int, float))
@@ -146,28 +139,17 @@ def validate_upsell(
             f"₹{MAX_PAYMENT_AMOUNT}."
         )
 
-    # --------------------------------------------------
-    # Evidence
-    # --------------------------------------------------
-
     if not evidence:
         errors.append(
             "Upsell evidence is required."
         )
-
-    # --------------------------------------------------
-    # Test mode
-    # --------------------------------------------------
+    #test mode
 
     if mode != REQUIRED_MODE:
         errors.append(
             "Payment Link creation is restricted "
             "to Razorpay Test Mode."
         )
-
-    # --------------------------------------------------
-    # Result
-    # --------------------------------------------------
 
     if errors:
 

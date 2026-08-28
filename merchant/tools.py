@@ -8,10 +8,7 @@ from merchant.data import (
     get_products,
 )
 
-
-# -------------------------------------------------------
-# Merchant Snapshot
-# -------------------------------------------------------
+#snapshot
 
 def get_merchant_snapshot():
     """
@@ -34,11 +31,7 @@ def get_merchant_snapshot():
         "products": products,
         "upsell_evidence": _get_upsell_evidence(),
     }
-
-
-# -------------------------------------------------------
-# Growth Evidence
-# -------------------------------------------------------
+#evidence
 
 def _get_upsell_evidence():
     """
@@ -62,10 +55,6 @@ def _get_upsell_evidence():
         }
     ]
 
-
-# -------------------------------------------------------
-# Growth Evidence Interface
-# -------------------------------------------------------
 
 def get_growth_evidence():
     """

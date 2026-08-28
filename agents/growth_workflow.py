@@ -57,11 +57,7 @@ def run_growth_workflow(
         7. Important money-action boundaries
            are written to the audit trail.
     """
-
-    # ==================================================
-    # 1. Identify growth opportunity
-    # ==================================================
-
+    #identify growth
     try:
 
         opportunity = identify_growth_opportunity(
@@ -97,9 +93,7 @@ def run_growth_workflow(
         },
     )
 
-    # ==================================================
-    # 2. Upsell proposed
-    # ==================================================
+    #upsell proposed
 
     audit_logger.log(
         "UPSELL_PROPOSED",
@@ -124,9 +118,6 @@ def run_growth_workflow(
         },
     )
 
-    # ==================================================
-    # 3. Deterministic upsell policy
-    # ==================================================
 
     policy_input = {
         **opportunity,
@@ -190,9 +181,7 @@ def run_growth_workflow(
         },
     )
 
-    # ==================================================
-    # 4. Prepare Payment Link request
-    # ==================================================
+    #link request
 
     amount = int(
         opportunity["final_amount"]
@@ -203,21 +192,6 @@ def run_growth_workflow(
         f"+ "
         f"{opportunity['upsell_product']}"
     )
-
-    # --------------------------------------------------
-    # Generate a short unique reference ID.
-    #
-    # Razorpay requires reference_id to be no more
-    # than 40 characters.
-    #
-    # Example:
-    #
-    # growth-a81f3c21
-    #
-    # The merchant_id is already recorded separately
-    # in the audit trail, so it does not need to be
-    # included in the Razorpay reference ID.
-    # --------------------------------------------------
 
     reference_id = (
         f"growth-{uuid4().hex[:8]}"
@@ -234,10 +208,7 @@ def run_growth_workflow(
             "mode": mode,
         },
     )
-
-    # ==================================================
-    # 5. Execute Razorpay Payment Link
-    # ==================================================
+    #payment link
 
     try:
 
@@ -248,13 +219,6 @@ def run_growth_workflow(
         )
 
     except Exception as error:
-
-        # --------------------------------------------------
-        # Razorpay failure is handled gracefully.
-        #
-        # No fake Payment Link is returned.
-        # No success event is recorded.
-        # --------------------------------------------------
 
         audit_logger.log(
             "PAYMENT_LINK_CREATION_FAILED",
@@ -286,21 +250,13 @@ def run_growth_workflow(
             "stage": "payment_link_creation",
             "reason": str(error),
         }
-
-        # ==================================================
-    # 6. Verify Razorpay Payment Link outcome
-    # ==================================================
+    #verify
 
     verification = verify_payment_link(
         payment_link,
         expected_amount=amount,
         expected_currency="INR",
     )
-
-    # --------------------------------------------------
-    # Outcome verification failed
-    # --------------------------------------------------
-
     if not verification["verified"]:
 
         audit_logger.log(
@@ -337,10 +293,6 @@ def run_growth_workflow(
             "short_url": payment_link.get("short_url"),
         }
 
-    # --------------------------------------------------
-    # Outcome successfully verified
-    # --------------------------------------------------
-
     payment_link_id = payment_link["id"]
 
     short_url = payment_link["short_url"]
@@ -358,10 +310,6 @@ def run_growth_workflow(
         },
     )
 
-    # ==================================================
-    # 7. Payment Link successfully created
-    # ==================================================
-
     audit_logger.log(
         "PAYMENT_LINK_CREATED",
         status="PASS",
@@ -373,10 +321,6 @@ def run_growth_workflow(
             "mode": mode,
         },
     )
-
-    # ==================================================
-    # 8. Workflow completed
-    # ==================================================
 
     audit_logger.log(
         "GROWTH_WORKFLOW_COMPLETED",

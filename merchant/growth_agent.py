@@ -1,11 +1,5 @@
 from typing import Any, Dict, List
 
-
-
-# =========================================================
-# Helpers
-# =========================================================
-
 def _validate_product(product: Dict[str, Any]) -> bool:
     """Return True when a product contains usable data."""
 
@@ -78,11 +72,7 @@ def _calculate_confidence(
         2,
     )
 
-
-# =========================================================
-# Growth Opportunity Identification
-# =========================================================
-
+#identification
 def identify_growth_opportunity(
     merchant_snapshot: Dict[str, Any],
 ) -> Dict[str, Any]:
@@ -140,10 +130,6 @@ def identify_growth_opportunity(
             "No upsell evidence available."
         )
 
-    # =====================================================
-    # 1. Validate merchant products
-    # =====================================================
-
     valid_products = [
         product
         for product in products
@@ -160,10 +146,6 @@ def identify_growth_opportunity(
         product["name"]: product
         for product in valid_products
     }
-
-    # =====================================================
-    # 2. Generate candidate opportunities
-    # =====================================================
 
     candidates: List[Dict[str, Any]] = []
 
@@ -185,10 +167,6 @@ def identify_growth_opportunity(
             "conversion_rate",
             0,
         )
-
-        # -----------------------------------------------
-        # Validate evidence
-        # -----------------------------------------------
 
         if base_product not in product_map:
             continue
@@ -214,9 +192,7 @@ def identify_growth_opportunity(
         if not 0 <= conversion_rate <= 1:
             continue
 
-        # -----------------------------------------------
-        # Base product information
-        # -----------------------------------------------
+        #pdt info
 
         product = product_map[
             base_product
@@ -230,10 +206,6 @@ def identify_growth_opportunity(
             "sales",
             0,
         )
-
-        # -----------------------------------------------
-        # Financial calculations
-        # -----------------------------------------------
 
         final_amount = (
             base_price
@@ -261,10 +233,6 @@ def identify_growth_opportunity(
             conversion_rate,
             sales,
         )
-
-        # -----------------------------------------------
-        # Candidate
-        # -----------------------------------------------
 
         candidates.append(
             {
@@ -300,26 +268,11 @@ def identify_growth_opportunity(
             }
         )
 
-    # =====================================================
-    # 3. Validate generated opportunities
-    # =====================================================
-
     if not candidates:
         raise ValueError(
             "No valid growth opportunities found."
         )
 
-    # =====================================================
-    # 4. Rank opportunities
-    # =====================================================
-
-    # We prioritize expected incremental revenue,
-    # while using evidence quality and confidence as
-    # secondary signals.
-    #
-    # NOTE:
-    # The 10% financial boundary is NOT checked here.
-    # That belongs to the deterministic policy engine.
 
     candidates.sort(
         key=lambda candidate: (
@@ -337,10 +290,7 @@ def identify_growth_opportunity(
     )
 
     selected = candidates[0]
-
-    # =====================================================
-    # 5. Build reasoning
-    # =====================================================
+    #reasoning
 
     base_product = selected[
         "base_product"
@@ -395,10 +345,7 @@ def identify_growth_opportunity(
             "revenue among the available opportunities."
         ),
     ]
-
-    # =====================================================
-    # 6. Return selected opportunity
-    # =====================================================
+    #selected opportunity
 
     return {
         "opportunity": "bounded_upsell",
@@ -453,6 +400,5 @@ def identify_growth_opportunity(
 
         "reasoning": reasoning,
 
-        # Useful for the React dashboard.
         "evaluated_opportunities": candidates,
     }

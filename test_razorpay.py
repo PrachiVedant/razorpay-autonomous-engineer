@@ -26,7 +26,6 @@ RAZORPAY_KEY_SECRET = "my-super-secret-key"
 
 
 print("\nSAFE CHANGE")
-print("--------------------")
 
 print(
     validate_changes(
@@ -36,7 +35,6 @@ print(
 
 
 print("\nUNSAFE CHANGE")
-print("--------------------")
 
 print(
     validate_changes(

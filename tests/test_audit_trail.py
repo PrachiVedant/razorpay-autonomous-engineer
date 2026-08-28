@@ -21,19 +21,11 @@ def test_failure_recovery_audit_trail(tmp_path):
         WORKFLOW_FAILED
     """
 
-    # --------------------------------------------------
-    # Create isolated audit log for this test
-    # --------------------------------------------------
-
     log_path = tmp_path / "audit_log.jsonl"
 
     logger = AuditLogger(
         log_path=log_path
     )
-
-    # --------------------------------------------------
-    # Simulate test failure
-    # --------------------------------------------------
 
     logger.log(
         AuditEvents.TEST_FAILED,
@@ -43,10 +35,6 @@ def test_failure_recovery_audit_trail(tmp_path):
         },
     )
 
-    # --------------------------------------------------
-    # Simulate repair attempt
-    # --------------------------------------------------
-
     logger.log(
         AuditEvents.REPAIR_STARTED,
         status="INFO",
@@ -54,10 +42,6 @@ def test_failure_recovery_audit_trail(tmp_path):
             "attempt": 1,
         },
     )
-
-    # --------------------------------------------------
-    # Simulate repair failure
-    # --------------------------------------------------
 
     logger.log(
         AuditEvents.REPAIR_FAILED,
@@ -67,10 +51,6 @@ def test_failure_recovery_audit_trail(tmp_path):
             "reason": "Repair agent produced no effective changes.",
         },
     )
-
-    # --------------------------------------------------
-    # Simulate rollback
-    # --------------------------------------------------
 
     logger.log(
         AuditEvents.ROLLBACK_COMPLETED,
@@ -82,10 +62,6 @@ def test_failure_recovery_audit_trail(tmp_path):
         },
     )
 
-    # --------------------------------------------------
-    # Simulate workflow termination
-    # --------------------------------------------------
-
     logger.log(
         AuditEvents.WORKFLOW_FAILED,
         status="FAIL",
@@ -93,10 +69,6 @@ def test_failure_recovery_audit_trail(tmp_path):
             "reason": "Autonomous repair failed.",
         },
     )
-
-    # --------------------------------------------------
-    # Read audit log
-    # --------------------------------------------------
 
     lines = log_path.read_text(
         encoding="utf-8"
@@ -112,10 +84,6 @@ def test_failure_recovery_audit_trail(tmp_path):
             entry
         )
 
-    # --------------------------------------------------
-    # Verify event sequence
-    # --------------------------------------------------
-
     assert [
         entry["event"]
         for entry in events
@@ -126,10 +94,6 @@ def test_failure_recovery_audit_trail(tmp_path):
         AuditEvents.ROLLBACK_COMPLETED,
         AuditEvents.WORKFLOW_FAILED,
     ]
-
-    # --------------------------------------------------
-    # Verify statuses
-    # --------------------------------------------------
 
     assert events[0]["status"] == "FAIL"
     assert events[1]["status"] == "INFO"

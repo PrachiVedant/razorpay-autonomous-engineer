@@ -116,10 +116,6 @@ def test_growth_workflow_blocks_excessive_upsell(
 
 def test_workflow_rejects_incomplete_payment_link(monkeypatch):
 
-    # --------------------------------------------------
-    # Force a valid growth opportunity
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_workflow,
         "identify_growth_opportunity",
@@ -141,10 +137,6 @@ def test_workflow_rejects_incomplete_payment_link(monkeypatch):
         },
     )
 
-    # --------------------------------------------------
-    # Allow the deterministic policy
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_workflow,
         "validate_upsell",
@@ -154,12 +146,7 @@ def test_workflow_rejects_incomplete_payment_link(monkeypatch):
             "reason": "Allowed for test.",
         },
     )
-
-    # --------------------------------------------------
-    # Return an INVALID Razorpay response
-    # Missing short_url
-    # --------------------------------------------------
-
+    #missing short url
     monkeypatch.setattr(
         growth_workflow,
         "create_payment_link",
@@ -189,10 +176,6 @@ def test_workflow_rejects_payment_link_with_wrong_amount(
     monkeypatch,
 ):
 
-    # --------------------------------------------------
-    # Force a valid growth opportunity
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_workflow,
         "identify_growth_opportunity",
@@ -214,10 +197,6 @@ def test_workflow_rejects_payment_link_with_wrong_amount(
         },
     )
 
-    # --------------------------------------------------
-    # Allow policy
-    # --------------------------------------------------
-
     monkeypatch.setattr(
         growth_workflow,
         "validate_upsell",
@@ -227,10 +206,6 @@ def test_workflow_rejects_payment_link_with_wrong_amount(
             "reason": "Allowed for test.",
         },
     )
-
-    # --------------------------------------------------
-    # Razorpay returns WRONG amount
-    # --------------------------------------------------
 
     monkeypatch.setattr(
         growth_workflow,
