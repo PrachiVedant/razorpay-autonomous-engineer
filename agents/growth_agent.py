@@ -1,92 +1,74 @@
 import json
-import re
-
 from agents.llm import OpenAIProvider
 from merchant.tools import get_merchant_snapshot
+from typing import Any, Dict
 
 
-def identify_growth_opportunity():
+def identify_growth_opportunity(
+    merchant_snapshot: Dict[str, Any] | None = None,
+) -> Dict[str, Any]:
     """
-    Analyze merchant performance and identify a growth opportunity.
+    Identify a growth opportunity from merchant evidence.
+
+    The LLM proposes the opportunity, but it does not execute
+    any payment action. The resulting evidence is later checked
+    deterministically by opportunity_validator.py.
     """
 
-    snapshot = get_merchant_snapshot()
+    if merchant_snapshot is None:
+        merchant_snapshot = get_merchant_snapshot()
 
     prompt = f"""
-You are a Growth Intelligence Agent for a payment platform.
+You are a merchant growth analyst.
 
-Your job is to analyze a merchant's payment and revenue data
-and identify the most important growth opportunity.
+Analyze the following merchant snapshot and identify ONE concrete,
+bounded growth opportunity.
 
 MERCHANT SNAPSHOT:
+{json.dumps(merchant_snapshot, indent=2)}
 
-{json.dumps(snapshot, indent=2)}
+Focus on payment conversion and failed payments when the evidence
+supports it.
 
-Analyze the data carefully.
-
-You must:
-
-1. Identify the most important growth opportunity.
-2. Support the opportunity using ONLY evidence from the snapshot.
-3. Identify the relevant payment or revenue metric.
-4. Estimate the potential impact using the available data.
-5. Recommend a next step.
-6. Assign a confidence score between 0 and 1.
-
-IMPORTANT:
-
-- Do not invent data.
-- Do not invent transaction values.
-- Do not claim an action was performed.
-- This stage is ANALYSIS ONLY.
-- Do not recommend refunds or other financial actions as if they
-  have already been executed.
-
-Return ONLY valid JSON in this exact structure:
+Return ONLY valid JSON in exactly this structure:
 
 {{
-    "opportunity_type": "string",
-    "severity": "low|medium|high",
+    "opportunity_type": "payment_conversion",
+    "severity": "high",
     "evidence": [
         {{
-            "metric": "string",
-            "value": "string",
-            "interpretation": "string"
+            "metric": "card_failure_rate",
+            "value": "100%",
+            "interpretation": "All card payments are failing."
+        }},
+        {{
+            "metric": "failed_payment_value",
+            "value": "6796",
+            "interpretation": "Failed payments represent significant transaction value."
         }}
     ],
-    "estimated_impact": "string",
-    "recommendation": "string",
-    "confidence": 0.0
+    "estimated_impact": "Potential recovery of failed payment value.",
+    "recommendation": "Investigate the card payment failure issue before taking action.",
+    "confidence": 0.95
 }}
+
+Important:
+- Use ONLY metrics present in the merchant snapshot.
+- Do not invent numbers.
+- Do not execute any payment action.
+- Do not create payment links.
+- Return JSON only.
 """
 
-    gateway = OpenAIProvider()
+    provider = OpenAIProvider()
 
-    response = gateway.generate(
-        prompt=prompt,
-        model="gpt-4o",
-        max_tokens=1500,
-    )
+    response = provider.generate(prompt)
 
-    return _extract_json(response)
-
-
-def _extract_json(text):
-    """
-    Extract JSON from an LLM response.
-    """
-
-    json_match = re.search(
-        r"\{.*\}",
-        text,
-        re.DOTALL,
-    )
-
-    if not json_match:
+    try:
+        opportunity = json.loads(response)
+    except json.JSONDecodeError as error:
         raise ValueError(
-            f"Could not parse JSON from response: {text}"
-        )
+            f"Growth agent returned invalid JSON: {error}"
+        ) from error
 
-    return json.loads(
-        json_match.group()
-    )
+    return opportunity

@@ -1,34 +1,35 @@
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
 from langchain_openai import ChatOpenAI
 
 
 class OpenAIProvider:
-    def __init__(self):
-        self.default_model = "gpt-5"
-        self.api_key = os.getenv("OPENAI_API_KEY")
+    """
+    Small wrapper around the OpenAI chat model.
 
-        if not self.api_key:
-            raise ValueError("OPENAI_API_KEY is not set")
+    Keeping the provider behind this interface allows tests to
+    monkeypatch `generate()` without making real API calls.
+    """
+
+    def __init__(self):
+        self.llm = ChatOpenAI(
+            model="gpt-4o-mini",
+            temperature=0,
+        )
 
     def generate(
         self,
-        prompt: str,
-        model: str | None = None,
-        max_tokens: int | None = None,
+        prompt,
+        model=None,
+        max_tokens=None,
     ):
-        llm = ChatOpenAI(
-            model=model or self.default_model,
-            api_key=self.api_key,
-        )
+        llm = self.llm
 
-        kwargs = {}
+        if model:
+            llm = ChatOpenAI(
+                model=model,
+                temperature=0,
+                max_tokens=max_tokens,
+            )
 
-        if max_tokens is not None:
-            kwargs["max_tokens"] = max_tokens
-
-        response = llm.invoke(prompt, **kwargs)
+        response = llm.invoke(prompt)
 
         return response.content

@@ -1,9 +1,20 @@
+from rzp_gate.action_registry import (
+    get_action,
+    record_action,
+)
+
 from audit.logger import log_event
 from agents.growth_agent import identify_growth_opportunity
 from agents.opportunity_validator import validate_opportunity
 from rzp_gate.policy import validate_payment_plan
 from rzp_gate.actions import RazorpayActions
-from razorpay.errors import BadRequestError, ServerError, GatewayError
+
+from razorpay.errors import (
+    BadRequestError,
+    ServerError,
+    GatewayError,
+)
+
 from merchant.data import get_orders
 
 
@@ -17,7 +28,11 @@ def run_growth_cycle():
           ↓
         Policy gate (allowed? needs human approval?)
           ↓
-        Execution (real Razorpay test-mode API call)
+        Idempotency check
+          ↓
+        Execution (Razorpay test-mode API call)
+          ↓
+        Record successful action
           ↓
         Audit log at every step
     """
@@ -40,8 +55,7 @@ def run_growth_cycle():
     )
 
     # --------------------------------------------------
-    # 2. Deterministic check: does the LLM's evidence
-    #    actually match ground-truth merchant data?
+    # 2. Deterministic validation
     # --------------------------------------------------
 
     validation = validate_opportunity(opportunity)
@@ -57,7 +71,9 @@ def run_growth_cycle():
         log_event(
             "GROWTH_CYCLE_REJECTED",
             agent="growth_loop",
-            data={"reason": validation["reason"]},
+            data={
+                "reason": validation["reason"],
+            },
         )
 
         return {
@@ -66,8 +82,7 @@ def run_growth_cycle():
         }
 
     # --------------------------------------------------
-    # 3. Policy gate: is this money action allowed?
-    #    Does it require a human in the loop?
+    # 3. Policy gate
     # --------------------------------------------------
 
     plan = {
@@ -112,7 +127,7 @@ def run_growth_cycle():
         }
 
     # --------------------------------------------------
-    # 4. Execute the real money action
+    # 4. Find recoverable orders
     # --------------------------------------------------
 
     orders = [
@@ -134,18 +149,62 @@ def run_growth_cycle():
         }
 
     target_order = orders[0]
+
+    order_id = target_order["order_id"]
+
+    # --------------------------------------------------
+    # 5. Idempotency / duplicate-action protection
+    # --------------------------------------------------
+
+    existing_action = get_action(order_id)
+
+    if existing_action:
+
+        log_event(
+            "DUPLICATE_ACTION_PREVENTED",
+            agent="growth_loop",
+            data={
+                "order_id": order_id,
+                "existing_action": existing_action,
+            },
+        )
+
+        return {
+            "status": "already_processed",
+            "order_id": order_id,
+            "existing_action": existing_action,
+        }
+
+    # --------------------------------------------------
+    # 6. Execute Razorpay action
+    # --------------------------------------------------
+
     actions = RazorpayActions()
 
     try:
+
         link = actions.create_recovery_payment_link(
             target_order
+        )
+
+        # --------------------------------------------------
+        # 7. Record successful action
+        # --------------------------------------------------
+
+        record_action(
+            order_id,
+            {
+                "action": "payment_link_created",
+                "link_id": link.get("id"),
+                "short_url": link.get("short_url"),
+            },
         )
 
         log_event(
             "PAYMENT_LINK_CREATED",
             agent="razorpay_actions",
             data={
-                "order_id": target_order["order_id"],
+                "order_id": order_id,
                 "link_id": link.get("id"),
                 "short_url": link.get("short_url"),
             },
@@ -156,15 +215,17 @@ def run_growth_cycle():
             "payment_link": link,
         }
 
+    # --------------------------------------------------
+    # 8. Permanent / invalid request failure
+    # --------------------------------------------------
+
     except BadRequestError as error:
-        # Malformed / invalid request. Not retried —
-        # escalate to a human instead of retrying blindly.
 
         log_event(
             "PAYMENT_LINK_FAILED",
             agent="razorpay_actions",
             data={
-                "order_id": target_order["order_id"],
+                "order_id": order_id,
                 "error": str(error),
                 "action_taken": "escalated_to_human",
             },
@@ -176,29 +237,43 @@ def run_growth_cycle():
             "escalated": True,
         }
 
+    # --------------------------------------------------
+    # 9. Transient Razorpay failure
+    # --------------------------------------------------
+
     except (ServerError, GatewayError) as error:
-        # Transient, Razorpay/gateway-side error. Safe to
-        # retry once before giving up.
 
         log_event(
             "PAYMENT_LINK_RETRY",
             agent="razorpay_actions",
             data={
-                "order_id": target_order["order_id"],
+                "order_id": order_id,
                 "error": str(error),
             },
         )
 
         try:
+
             link = actions.create_recovery_payment_link(
                 target_order
+            )
+
+            # Record successful retry as well
+            record_action(
+                order_id,
+                {
+                    "action": "payment_link_created",
+                    "link_id": link.get("id"),
+                    "short_url": link.get("short_url"),
+                    "attempts": 2,
+                },
             )
 
             log_event(
                 "PAYMENT_LINK_CREATED_ON_RETRY",
                 agent="razorpay_actions",
                 data={
-                    "order_id": target_order["order_id"],
+                    "order_id": order_id,
                     "link_id": link.get("id"),
                 },
             )
@@ -215,7 +290,7 @@ def run_growth_cycle():
                 "PAYMENT_LINK_FAILED_FINAL",
                 agent="razorpay_actions",
                 data={
-                    "order_id": target_order["order_id"],
+                    "order_id": order_id,
                     "error": str(retry_error),
                 },
             )

@@ -1,6 +1,10 @@
 from typing import Any, Dict
 from uuid import uuid4
 
+from rzp_gate.outcome_verifier import (
+    verify_payment_link,
+)
+
 from agents.audit import audit_logger
 
 from merchant.growth_agent import (
@@ -201,20 +205,22 @@ def run_growth_workflow(
     )
 
     # --------------------------------------------------
-    # Generate a unique reference ID.
+    # Generate a short unique reference ID.
     #
-    # Razorpay does not allow reusing the same
-    # reference_id for another Payment Link.
+    # Razorpay requires reference_id to be no more
+    # than 40 characters.
     #
     # Example:
     #
-    # demo-merchant-growth-upsell-a81f3c21
+    # growth-a81f3c21
+    #
+    # The merchant_id is already recorded separately
+    # in the audit trail, so it does not need to be
+    # included in the Razorpay reference ID.
     # --------------------------------------------------
 
     reference_id = (
-        f"{merchant_id}-"
-        f"growth-upsell-"
-        f"{uuid4().hex[:8]}"
+        f"growth-{uuid4().hex[:8]}"
     )
 
     audit_logger.log(
@@ -281,37 +287,31 @@ def run_growth_workflow(
             "reason": str(error),
         }
 
-    # ==================================================
-    # 6. Validate Razorpay response
+        # ==================================================
+    # 6. Verify Razorpay Payment Link outcome
     # ==================================================
 
-    payment_link_id = payment_link.get(
-        "id"
-    )
-
-    short_url = payment_link.get(
-        "short_url"
+    verification = verify_payment_link(
+        payment_link,
+        expected_amount=amount,
+        expected_currency="INR",
     )
 
     # --------------------------------------------------
-    # Never claim success without both values.
+    # Outcome verification failed
     # --------------------------------------------------
 
-    if not payment_link_id or not short_url:
-
-        reason = (
-            "Razorpay returned an incomplete "
-            "Payment Link response."
-        )
+    if not verification["verified"]:
 
         audit_logger.log(
-            "PAYMENT_LINK_CREATION_FAILED",
+            "PAYMENT_LINK_OUTCOME_VERIFICATION_FAILED",
             status="FAIL",
             details={
                 "merchant_id": merchant_id,
-                "reason": reason,
+                "reason": verification["reason"],
                 "mode": mode,
                 "reference_id": reference_id,
+                "payment_link_response": payment_link,
             },
         )
 
@@ -320,24 +320,43 @@ def run_growth_workflow(
             status="FAIL",
             details={
                 "merchant_id": merchant_id,
-                "stage": (
-                    "payment_link_response_validation"
-                ),
-                "reason": reason,
+                "stage": "outcome_verification",
+                "reason": verification["reason"],
                 "recovery_action": (
                     "Stopped safely without reporting "
-                    "an incomplete payment link."
+                    "a verified payment link."
                 ),
             },
         )
 
         return {
             "success": False,
-            "stage": (
-                "payment_link_response_validation"
-            ),
-            "reason": reason,
+            "stage": "outcome_verification",
+            "reason": verification["reason"],
+            "payment_link_id": payment_link.get("id"),
+            "short_url": payment_link.get("short_url"),
         }
+
+    # --------------------------------------------------
+    # Outcome successfully verified
+    # --------------------------------------------------
+
+    payment_link_id = payment_link["id"]
+
+    short_url = payment_link["short_url"]
+
+    audit_logger.log(
+        "PAYMENT_LINK_OUTCOME_VERIFIED",
+        status="PASS",
+        details={
+            "merchant_id": merchant_id,
+            "payment_link_id": payment_link_id,
+            "reference_id": reference_id,
+            "amount": amount,
+            "currency": "INR",
+            "mode": mode,
+        },
+    )
 
     # ==================================================
     # 7. Payment Link successfully created

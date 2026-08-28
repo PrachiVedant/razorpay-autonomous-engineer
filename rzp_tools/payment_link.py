@@ -5,10 +5,6 @@ import razorpay
 from dotenv import load_dotenv
 
 
-# Load .env automatically.
-#
-# This is safe because the actual secret values are never
-# written to the audit log or returned by this module.
 load_dotenv()
 
 
@@ -18,9 +14,9 @@ class PaymentLinkClient:
 
     Responsibilities:
         - Load Razorpay Test Mode credentials.
-        - Ensure only Test Mode is used.
-        - Create a real Razorpay Payment Link.
-        - Provide a deterministic failure switch for the demo.
+        - Refuse live mode.
+        - Create Razorpay Payment Links.
+        - Support controlled failure demonstration.
 
     The growth agent proposes.
     The policy validates.
@@ -32,11 +28,11 @@ class PaymentLinkClient:
         self.mode = os.getenv(
             "RAZORPAY_MODE",
             "test",
-        ).lower()
+        ).lower().strip()
 
-        # --------------------------------------------------
-        # Live mode is NEVER allowed by this demo.
-        # --------------------------------------------------
+        # =================================================
+        # SECURITY BOUNDARY
+        # =================================================
 
         if self.mode != "test":
             raise RuntimeError(
@@ -62,6 +58,10 @@ class PaymentLinkClient:
                 "RAZORPAY_KEY_SECRET is not configured."
             )
 
+        # IMPORTANT:
+        # Credentials are used only to construct the
+        # Razorpay client and are never returned or logged.
+
         self.client = razorpay.Client(
             auth=(
                 key_id,
@@ -82,40 +82,60 @@ class PaymentLinkClient:
         amount:
             Amount in rupees.
 
-        The Razorpay API receives the amount in paise.
+        Razorpay receives amount in paise.
 
-        A controlled failure can be enabled for the final
-        failure demo with:
+        A controlled failure can be enabled with:
 
             RAZORPAY_DEMO_FORCE_FAILURE=1
 
-        This failure happens at the execution boundary,
-        allowing the workflow's real error handling and
-        audit trail to be demonstrated safely.
+        This deliberately raises an exception and never
+        returns a fake successful payment link.
         """
 
-        # --------------------------------------------------
+        # =================================================
         # Validate amount
-        # --------------------------------------------------
+        # =================================================
+
+        if not isinstance(
+            amount,
+            (int, float),
+        ):
+            raise ValueError(
+                "Payment amount must be numeric."
+            )
 
         if amount <= 0:
             raise ValueError(
                 "Payment amount must be positive."
             )
 
-        # --------------------------------------------------
+        # =================================================
+        # Validate reference ID
+        # =================================================
+
+        if not reference_id:
+            raise ValueError(
+                "Payment reference ID is required."
+            )
+
+        if len(reference_id) > 40:
+            raise ValueError(
+                "Payment reference ID must not exceed "
+                "40 characters."
+            )
+
+        # =================================================
+        # Validate description
+        # =================================================
+
+        if not description:
+            raise ValueError(
+                "Payment description is required."
+            )
+
+        # =================================================
         # Controlled demo failure
-        # --------------------------------------------------
-        #
-        # IMPORTANT:
-        # This does NOT create a fake successful payment link.
-        #
-        # It deliberately raises an execution failure so that
-        # the workflow handles the same type of exception that
-        # a Razorpay API/network failure would produce.
-        #
-        # This is only enabled explicitly for the failure demo.
-        # --------------------------------------------------
+        # =================================================
 
         force_failure = os.getenv(
             "RAZORPAY_DEMO_FORCE_FAILURE",
@@ -127,14 +147,15 @@ class PaymentLinkClient:
             "true",
             "yes",
         }:
+
             raise RuntimeError(
                 "Controlled Razorpay Test Mode API failure "
                 "for graceful-failure demonstration."
             )
 
-        # --------------------------------------------------
+        # =================================================
         # Convert rupees → paise
-        # --------------------------------------------------
+        # =================================================
 
         amount_in_paise = int(
             amount * 100
@@ -147,9 +168,9 @@ class PaymentLinkClient:
             "reference_id": reference_id,
         }
 
-        # --------------------------------------------------
-        # REAL Razorpay Test Mode API call
-        # --------------------------------------------------
+        # =================================================
+        # REAL RAZORPAY TEST MODE API CALL
+        # =================================================
 
         return self.client.payment_link.create(
             payload
